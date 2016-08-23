@@ -17,18 +17,6 @@
 				
 				<label for="tel">Numéro de téléphone<span class="requis">*</span></label>
 				<input type="text" name="tel" value="${form['tel']}" /> <span class="error">${erreurs['tel']}</span> <br />
-				
-				<label for="fumeur">Fumeur :</label>
-				<input type="radio" name="fumeur" value="NonFumeur" checked>
-				<label for="NonFumeur"><img src="/WEB-INF/images/logo_non_fumeur.jpg" alt="Non fumeur" /></label>
-				<input type="radio" name="fumeur" value="Fumeur">
-				<label for="Fumeur"><img src="/WEB-INF/images/logo_fumeur.jpg" alt="Fumeur" /></label><br />
-				
-				<label for="musique">Musique :</label>
-				<input type="radio" name="musique" value="NonMusique" checked>
-				<label for="NonMusique">Sans musique</label>
-				<input type="radio" name="musique" value="AvecMusique">
-				<label for="AvecMusique">Avec musique</label><br />
 		
 				<label for="pwd1">Mot de passe<span class="requis">*</span></label> 
 				<input type="password" name="pwd1" value="${form['pwd1']}" /><br />

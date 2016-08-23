@@ -10,7 +10,7 @@
 			<p>Vous pouvez vous inscrire via ce formulaire.</p>
 			<div>
 				<label for="name">Nom d'utilisateur<span class="requis">*</span></label> 
-				<input type="text" name="name" value="${form['name']}"/><br />
+				<input type="text" name="name" value="${form['name']}"/><span class="error">${erreurs['name']}</span><br />
 				
 				<label for="email">Adresse email<span class="requis">*</span></label>
 				<input type="text" name="email" value="${form['email']}" /> <span class="error">${erreurs['email']}</span> <br />

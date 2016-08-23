@@ -19,7 +19,7 @@ import com.squirrels.oboulot.bean.User;
 @WebServlet("/formInscription")
 public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/formulaireInscription.jsp";
+	public static String VIEW_PAGES_URL="/WEB-INF/compte/inscription/formulaireInscription.jsp";
 	public static final String FIELD_NAME = "name";
 	public static final String FIELD_EMAIL = "email"; 
 	public static final String FIELD_TEL = "tel";

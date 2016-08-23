@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +52,7 @@ public class Inscription extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		ServletContext application = request.getServletContext();
 		
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
@@ -58,12 +60,12 @@ public class Inscription extends HttpServlet {
 		String name = request.getParameter(FIELD_NAME);
 		String tel = request.getParameter(FIELD_TEL);
 		
-		Map<String, User> users = (HashMap<String, User>) session.getAttribute("users");
+		Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");
 		if(users==null){
 			users = new HashMap<String, User>();
 			User admin = new User("Admin", "admin@gmail.com", "123456", "0611223344");
 			users.put("Admin", admin);
-			session.setAttribute( "users", users );
+			application.setAttribute( "users", users );
 		}
 		
 		HashMap<String, String>erreurs = new HashMap<String, String>();
@@ -133,7 +135,7 @@ public class Inscription extends HttpServlet {
 		
 		if (actionMessage.equals(SUCCES)){
 			users.put(newUser.getName(), newUser);
-			session.setAttribute( "users", users );
+			application.setAttribute( "users", users );
 			session.setAttribute("connectedUser", newUser);
 			RequestDispatcher dispat = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 			dispat.forward(request,response);

@@ -17,12 +17,12 @@ function init() {
 	directionsDisplay = new google.maps.DirectionsRenderer();
 	directionsDisplay.setOptions({polylineOptions: polyline});
 	
-	/*emplacement par défaut de la carte (Toulouse)*/
-	var maison = new google.maps.LatLng(43.6042600, 1.4436700);
+	/*emplacement par défaut de la carte (Nantes)*/
+	var maison = new google.maps.LatLng(47.214883, -1.545749);
 	
 	/*option par défaut de la carte*/
 	var myOptions = {
-	  zoom:8,
+	  zoom:12,
 	  mapTypeId: google.maps.MapTypeId.ROADMAP,
 	  center: maison
 	}

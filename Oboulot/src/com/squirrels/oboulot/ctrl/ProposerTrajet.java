@@ -227,16 +227,12 @@ public class ProposerTrajet extends HttpServlet {
 	
 	private String validateNbPlace(String nbplace) {
 		if ( nbplace != null && nbplace.trim().length() != 0 ) {
-			try {
 				int i = Integer.parseInt(nbplace);
 				if (0<i && i<5){
 					return null;
 				} else {
 					return "Vous pouvez proposer 1 à 4 places";
 				}
-			} catch (Exception e){
-				return "Veuillez entrer un chiffre numérique";
-			}
 		} else {
 			return "Veuillez entrer le nombre de places que vous proposez";
 		}

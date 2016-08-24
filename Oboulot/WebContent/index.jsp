@@ -62,53 +62,34 @@
 					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith<%-- ${profile.name} --%> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profil</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Paramètres</a>
+						<li><a href="#" data-toggle="modal" data-target="#profil"><i class="fa fa-fw fa-user"></i> Profil</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#parametres"><i class="fa fa-fw fa-gear"></i> Paramètres</a>
 						</li>
 						<li class="divider"></li>
 						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Se déconnecter </a></li>
 					</ul></li>
 					
 				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Se connecter<b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">
-						<%-- <c:import url="/WEB-INF/compte/formulaireConnection.jsp"></c:import> --%>
-						</a></li>
-					</ul>
+				<li class="dropdown"><a href="#" 
+					data-toggle="modal" data-target="#connecter">Se connecter</a>
 				</li>
 				
 				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="modal" data-target="#inscrire">S'inscrire<b class="caret"></b></a>
-					<div class="modal fade" id="inscrire" role="dialog">
-						<div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import></a>
-        </div>
-      </div>
-      
-    </div>
-						
-					</div>
+				<li class="dropdown"><a href="#"
+					data-toggle="modal" data-target="#inscrire">S'inscrire</a>
 				</li>
 				
 			</ul>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li><a href="index.jsp" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
+					<li><a href="index.jsp" data-toggle="collapse" data-target="#Rechercher"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Rechercher" class="collapse">
 							<%-- <c:import url="/WEB-INF/trajet/recherche.jsp"></c:import> --%>
 						</div>
 					</li>
-					<li><a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
+					<li><a href="javascript:;" data-toggle="collapse" data-target="#Proposer"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Proposer" class="collapse">
-							<%-- <c:import url="/WEB-INF/trajet/propose.jsp"></c:import> --%>
+							<c:import url="/WEB-INF/trajet/formulaireProposerTrajet.jsp"></c:import>
 						</div>
 					</li>
 				</ul>
@@ -128,6 +109,50 @@
 	<script src="js/plugins/morris/raphael.min.js"></script>
 	<script src="js/plugins/morris/morris.min.js"></script>
 	<script src="js/plugins/morris/morris-data.js"></script>
+
+<div class="modal fade" id="inscrire" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import></a>
+        	</div>
+      	</div>
+    </div>
+</div>
+<div class="modal fade" id="connecter" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<a href="#"><c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import></a>
+        	</div>
+      	</div>
+    </div>
+</div>
+<div class="modal fade" id="profil" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		Mon profil
+        	</div>
+      	</div>
+    </div>
+</div>
+<div class="modal fade" id="parametres" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		Paramètres d'application<br>
+          		-<br>
+          		-<br>
+        	</div>
+      	</div>
+    </div>
+</div>
+
 
 </body>
 </html>

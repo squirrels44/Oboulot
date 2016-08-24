@@ -37,7 +37,7 @@
 					data-toggle="dropdown"><i class="fa fa-bell"></i> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu alert-dropdown">
-						<li><a href="#">Jean vous accepte lundi <span
+						<li><a href="#">Jean ok lundi <span
 								class="label label-success">-</span></a></li>
 						<li><a href="#">Jean vous accepte mardi <span
 								class="label label-success">-</span></a></li>
@@ -63,20 +63,33 @@
 						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log
 								Out</a></li>
 					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">LogIn<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">c:import formulaire de connection</a>
+						</li>
+						<li><a href="#"><c:import url="/WEB-INF/compte/inscription/formulaireInscription.jsp"></c:import>
+						</a>
+					</ul>
+				</li>
 			</ul>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li><a href="index.jsp" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Rechercher" class="collapse">
-							<c:import url="/WEB-INF/trajet/recherche.jsp"></c:import></div></li>
+							<%-- <c:import url="/WEB-INF/trajet/recherche.jsp"></c:import> --%>
+						</div>
+					</li>
 					<li><a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Proposer" class="collapse">
-							<c:import url="/WEB-INF/trajet/propose.jsp"></c:import></div></li>
+							<%-- <c:import url="/WEB-INF/trajet/propose.jsp"></c:import> --%>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</nav>
 		<div id="page-wrapper">
-			<c:import url="/WEB-INF/carte/carte.jsp"></c:import>
+			<%-- <c:import url="/WEB-INF/carte/carte.jsp"></c:import>  --%>
 		</div>
 	</div>
 

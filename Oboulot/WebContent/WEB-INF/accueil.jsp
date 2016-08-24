@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+Bienvenu ${sessionScope.connectedUser}
 
 </body>
 </html>

@@ -81,11 +81,21 @@
 				
 				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">S'inscrire<b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import>
-						</a></li>
-					</ul>
+					data-toggle="modal" data-target="#inscrire">S'inscrire<b class="caret"></b></a>
+					<div class="modal fade" id="inscrire" role="dialog">
+						<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import></a>
+        </div>
+      </div>
+      
+    </div>
+						
+					</div>
 				</li>
 				
 			</ul>
@@ -105,7 +115,7 @@
 			</div>
 		</nav>
 		<div id="page-wrapper">
-			<%-- <c:import url="/WEB-INF/carte/carte.jsp"></c:import>  --%>
+			<c:import url="/WEB-INF/carte/carte.jsp"></c:import>
 		</div>
 	</div>
 

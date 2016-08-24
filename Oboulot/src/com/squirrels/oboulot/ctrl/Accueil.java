@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/index")
 public class Accueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/accueil.jsp";
+	public static String VIEW_PAGES_URL="/WEB-INF/index.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()

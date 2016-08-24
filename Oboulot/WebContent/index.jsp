@@ -33,45 +33,61 @@
 				<a class="navbar-brand" href="index.jsp">Accueil</a>
 			</div>
 			<ul class="nav navbar-right top-nav">
+				
+				<%-- <c:if ${connecté}> élément de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><i class="fa fa-bell"></i> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu alert-dropdown">
+						<%-- <c:foreach ${Profile.notification} > </c:foreach>--%>
+						
 						<li><a href="#">Jean ok lundi <span
-								class="label label-success">-</span></a></li>
-						<li><a href="#">Jean vous accepte mardi <span
-								class="label label-success">-</span></a></li>
-						<li><a href="#">Jean décline pour jeudi <span
-								class="label label-danger">-</span></a></li>
+								class="label label-success">o</span></a></li>
+						<li><a href="#">Jean ok mardi <span
+								class="label label-success">o</span></a></li>
+						<li><a href="#">Jean pas ok jeudi <span
+								class="label label-danger">x</span></a></li>
 						<li><a href="#">Nouvelle demande <span
-								class="label label-info">-</span></a></li>
+								class="label label-info">i</span></a></li>
 						<li><a href="#">Nouvelle demande <span
-								class="label label-info">-</span></a></li>
+								class="label label-info">i</span></a></li>
 						<li><a href="#">Nouvelle demande <span
-								class="label label-info">-</span></a></li>
+								class="label label-info">i</span></a></li>
 						<li class="divider"></li>
 						<li><a href="#">View All</a></li>
 					</ul></li>
+					
+				<%-- <c:if ${connecté}> élément de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith<%-- ${profile.name} --%> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profil</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Paramètres</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log
-								Out</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Se déconnecter </a></li>
 					</ul></li>
+					
+				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">LogIn<b class="caret"></b></a>
+					data-toggle="dropdown">Se connecter<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">c:import formulaire de connection</a>
-						</li>
-						<li><a href="#"><c:import url="/WEB-INF/compte/inscription/formulaireInscription.jsp"></c:import>
-						</a>
+						<li><a href="#">
+						<%-- <c:import url="/WEB-INF/compte/formulaireConnection.jsp"></c:import> --%>
+						</a></li>
 					</ul>
 				</li>
+				
+				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">S'inscrire<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import>
+						</a></li>
+					</ul>
+				</li>
+				
 			</ul>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">

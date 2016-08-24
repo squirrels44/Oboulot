@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Oboulo Covoiturage</title>
 <meta charset="utf-8">
 <!-- Bootstrap Core CSS -->
@@ -34,7 +34,7 @@
 			</div>
 			<ul class="nav navbar-right top-nav">
 				
-				<%-- <c:if ${connecté}> élément de liste suivant </c:if> --%>
+				<%-- <c:if ${connectÃ©}> Ã©lÃ©ment de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><i class="fa fa-bell"></i> <b
 						class="caret"></b></a>
@@ -57,24 +57,24 @@
 						<li><a href="#">View All</a></li>
 					</ul></li>
 					
-				<%-- <c:if ${connecté}> élément de liste suivant </c:if> --%>
+				<%-- <c:if ${connectÃ©}> Ã©lÃ©ment de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith<%-- ${profile.name} --%> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="#" data-toggle="modal" data-target="#profil"><i class="fa fa-fw fa-user"></i> Profil</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#parametres"><i class="fa fa-fw fa-gear"></i> Paramètres</a>
+						<li><a href="#" data-toggle="modal" data-target="#parametres"><i class="fa fa-fw fa-gear"></i> ParamÃ¨tres</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Se déconnecter </a></li>
+						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Se dÃ©connecter </a></li>
 					</ul></li>
 					
-				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
+				<%-- <c:if ${!connectÃ©}> Ã©lÃ©ment de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" 
 					data-toggle="modal" data-target="#connecter">Se connecter</a>
 				</li>
 				
-				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
+				<%-- <c:if ${!connectÃ©}> Ã©lÃ©ment de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#"
 					data-toggle="modal" data-target="#inscrire">S'inscrire</a>
 				</li>
@@ -96,7 +96,7 @@
 			</div>
 		</nav>
 		<div id="page-wrapper">
-			<c:import url="/WEB-INF/carte/carte.jsp"></c:import>
+			<c:import url="/carte/carte.jsp"></c:import>
 		</div>
 	</div>
 
@@ -145,7 +145,7 @@
       	<div class="modal-content">
      		<div class="modal-body">
         		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		Paramètres d'application<br>
+          		ParamÃ¨tres d'application<br>
           		-<br>
           		-<br>
         	</div>

@@ -7,6 +7,10 @@ public class User {
 	private String pwd;
 	private String tel;
 
+	public User() {
+		super();
+	}
+
 	public User(String name, String email, String pwd, String tel) {
 		this.name = name;
 		this.email = email;

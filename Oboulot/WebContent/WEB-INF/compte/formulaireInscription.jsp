@@ -1,5 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Inscription</title>
+</head>
+<body>
 	<form method="POST" action="formInscription">
-			<p>Vous pouvez vous inscrire via ce formulaire.</p>
 			<div>
 				<label for="name">Nom d'utilisateur<span class="requis">*</span></label> 
 				<input type="text" name="name" value="${form['name']}"/><span class="error">${erreurs['name']}</span><br />
@@ -21,3 +28,5 @@
 				<input type="reset" name="reset" value="Rafraichir" />
 			</div>
 	</form>
+</body>
+</html>

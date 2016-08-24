@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Oboulo Covoiturage</title>
 <meta charset="utf-8">
 <!-- Bootstrap Core CSS -->
@@ -33,63 +33,70 @@
 				<a class="navbar-brand" href="index.jsp">Accueil</a>
 			</div>
 			<ul class="nav navbar-right top-nav">
+				
+				<%-- <c:if ${connecté}> élément de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><i class="fa fa-bell"></i> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu alert-dropdown">
+						<%-- <c:foreach ${Profile.notification} > </c:foreach>--%>
+						
 						<li><a href="#">Jean ok lundi <span
-								class="label label-success">-</span></a></li>
-						<li><a href="#">Jean vous accepte mardi <span
-								class="label label-success">-</span></a></li>
-						<li><a href="#">Jean d�cline pour jeudi <span
-								class="label label-danger">-</span></a></li>
+								class="label label-success">o</span></a></li>
+						<li><a href="#">Jean ok mardi <span
+								class="label label-success">o</span></a></li>
+						<li><a href="#">Jean pas ok jeudi <span
+								class="label label-danger">x</span></a></li>
 						<li><a href="#">Nouvelle demande <span
-								class="label label-info">-</span></a></li>
+								class="label label-info">i</span></a></li>
 						<li><a href="#">Nouvelle demande <span
-								class="label label-info">-</span></a></li>
+								class="label label-info">i</span></a></li>
 						<li><a href="#">Nouvelle demande <span
-								class="label label-info">-</span></a></li>
+								class="label label-info">i</span></a></li>
 						<li class="divider"></li>
 						<li><a href="#">View All</a></li>
 					</ul></li>
+					
+				<%-- <c:if ${connecté}> élément de liste suivant </c:if> --%>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith<%-- ${profile.name} --%> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+						<li><a href="#" data-toggle="modal" data-target="#profil"><i class="fa fa-fw fa-user"></i> Profil</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#parametres"><i class="fa fa-fw fa-gear"></i> Paramètres</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log
-								Out</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Se déconnecter </a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">LogIn<b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">c:import formulaire de connection</a>
-						</li>
-						<li><a href="#"><c:import url="/WEB-INF/compte/inscription/formulaireInscription.jsp"></c:import>
-						</a>
-					</ul>
+					
+				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
+				<li class="dropdown"><a href="#" 
+					data-toggle="modal" data-target="#connecter">Se connecter</a>
 				</li>
+				
+				<%-- <c:if ${!connecté}> élément de liste suivant </c:if> --%>
+				<li class="dropdown"><a href="#"
+					data-toggle="modal" data-target="#inscrire">S'inscrire</a>
+				</li>
+				
 			</ul>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li><a href="index.jsp" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
+					<li><a href="index.jsp" data-toggle="collapse" data-target="#Rechercher"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Rechercher" class="collapse">
 							<%-- <c:import url="/WEB-INF/trajet/recherche.jsp"></c:import> --%>
 						</div>
 					</li>
-					<li><a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
+					<li><a href="javascript:;" data-toggle="collapse" data-target="#Proposer"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Proposer" class="collapse">
-							<%-- <c:import url="/WEB-INF/trajet/propose.jsp"></c:import> --%>
+							<c:import url="/WEB-INF/trajet/formulaireProposerTrajet.jsp"></c:import>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</nav>
 		<div id="page-wrapper">
-			<%-- <c:import url="/WEB-INF/carte/carte.jsp"></c:import>  --%>
+			<%-- <c:import url="/carte/carte.jsp"></c:import> --%>
 		</div>
 	</div>
 
@@ -102,6 +109,50 @@
 	<script src="js/plugins/morris/raphael.min.js"></script>
 	<script src="js/plugins/morris/morris.min.js"></script>
 	<script src="js/plugins/morris/morris-data.js"></script>
+
+<div class="modal fade" id="inscrire" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import></a>
+        	</div>
+      	</div>
+    </div>
+</div>
+<div class="modal fade" id="connecter" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<a href="#"><c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import></a>
+        	</div>
+      	</div>
+    </div>
+</div>
+<div class="modal fade" id="profil" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		Mon profil
+        	</div>
+      	</div>
+    </div>
+</div>
+<div class="modal fade" id="parametres" role="dialog">
+	<div class="modal-dialog">
+      	<div class="modal-content">
+     		<div class="modal-body">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		Paramètres d'application<br>
+          		-<br>
+          		-<br>
+        	</div>
+      	</div>
+    </div>
+</div>
+
 
 </body>
 </html>

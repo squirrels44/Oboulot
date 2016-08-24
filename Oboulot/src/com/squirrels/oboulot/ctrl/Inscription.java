@@ -20,7 +20,7 @@ import com.squirrels.oboulot.bean.User;
 @WebServlet("/formInscription")
 public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/compte/inscription/formulaireInscription.jsp";
+	public static String VIEW_PAGES_URL="/index.jsp";
 	public static final String FIELD_NAME = "name";
 	public static final String FIELD_EMAIL = "email"; 
 	public static final String FIELD_TEL = "tel";
@@ -137,7 +137,7 @@ public class Inscription extends HttpServlet {
 			users.put(newUser.getName(), newUser);
 			application.setAttribute( "users", users );
 			session.setAttribute("connectedUser", newUser);
-			RequestDispatcher dispat = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+			RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");
 			dispat.forward(request,response);
 		} else{
 			request.setAttribute("errorStatus", false); 

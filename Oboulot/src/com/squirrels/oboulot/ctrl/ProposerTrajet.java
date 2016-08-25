@@ -36,14 +36,14 @@ public class ProposerTrajet extends HttpServlet {
 	public static String actionMessage;
 	Trajet newTrajet = null;
 
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProposerTrajet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProposerTrajet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,12 +59,12 @@ public class ProposerTrajet extends HttpServlet {
 		//Vérifier les différentes informations
 		//Si non valide, renvoyer sur la même page avec message d'erreur
 		//Si valide, renvoyer vers... et enregistrer trajet dans application
-		
+
 		HttpSession session = request.getSession();
 		ServletContext application = request.getServletContext();
-		
+
 		User connectedUser = (User) session.getAttribute("connectedUser");
-		
+
 		String ptdepart = request.getParameter(FIELD_DPT);
 		String ptarrivee = request.getParameter(FIELD_ARV);
 		String ptpassage = request.getParameter(FIELD_PSG);
@@ -73,7 +73,7 @@ public class ProposerTrajet extends HttpServlet {
 		String nbplace = request.getParameter(FIELD_NBPLACE);
 		String fumeur = request.getParameter(FIELD_FUMEUR);
 		String musique = request.getParameter(FIELD_MUSIQUE);
-		
+
 		Map<String, Trajet> trajets = (HashMap<String, Trajet>) application.getAttribute("trajets");
 		if(trajets==null){
 			trajets = new HashMap<String, Trajet>();
@@ -81,13 +81,13 @@ public class ProposerTrajet extends HttpServlet {
 			trajets.put("Admin", admin);
 			application.setAttribute( "users", trajets );
 		}
-		
+
 		HashMap<String, String>erreurs = new HashMap<String, String>();
 		HashMap<String, String>form = new HashMap<String, String>();
-		
+
 		newTrajet = new Trajet(ptdepart,ptarrivee);
 		request.setAttribute("newTrajet", newTrajet);
-		
+
 		String errPtDepart = validateAdresse(ptdepart) ;
 		if(errPtDepart!=null){
 			erreurs.put(FIELD_DPT, errPtDepart);
@@ -97,7 +97,7 @@ public class ProposerTrajet extends HttpServlet {
 			form.put(FIELD_DPT, ptdepart);
 			actionMessage = SUCCES;
 		}
-		
+
 		String errPtArrivee = validateAdresse(ptarrivee) ;
 		if(errPtArrivee!=null){
 			erreurs.put(FIELD_ARV, errPtArrivee);
@@ -112,7 +112,7 @@ public class ProposerTrajet extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
+
 		String errPtPassage = validateAdresseFacultative(ptpassage) ;
 		if(errPtPassage!=null){
 			erreurs.put(FIELD_PSG, errPtPassage);
@@ -127,7 +127,7 @@ public class ProposerTrajet extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
+
 		String errDate = validateDate(date) ;
 		if(errDate!=null){
 			erreurs.put(FIELD_DATE, errDate);
@@ -142,7 +142,7 @@ public class ProposerTrajet extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
+
 		String errHeure = validateHeure(heure) ;
 		if(errHeure!=null){
 			erreurs.put(FIELD_HEURE, errHeure);
@@ -157,7 +157,7 @@ public class ProposerTrajet extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
+
 		String errNbPlace = validateNbPlace(nbplace) ;
 		if(errNbPlace!=null){
 			erreurs.put(FIELD_NBPLACE, errNbPlace);
@@ -172,14 +172,14 @@ public class ProposerTrajet extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
+
 		form.put(FIELD_FUMEUR, fumeur);
 		form.put(FIELD_MUSIQUE, musique);
-		
+
 		request.setAttribute("form", form);
 		request.setAttribute("erreurs", erreurs);
 		request.setAttribute("actionMessage", actionMessage);
-		
+
 		if (actionMessage.equals(SUCCES)){
 			trajets.put(connectedUser.getName(), newTrajet);
 			application.setAttribute( "trajets", trajets );
@@ -195,23 +195,13 @@ public class ProposerTrajet extends HttpServlet {
 
 	private String validateAdresse(String adresse) {
 		if ( adresse != null && adresse.trim().length() != 0 ) {
-			if ( !adresse.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) { 
-				return "Veuillez saisir une adresse valide";
-			} 
-		} else { 
 			return "L'adresse est obligatoire"; 
 		}
 		return null ;
 	}
-	
+
 	private String validateAdresseFacultative(String adresse) {
-		if ( adresse != null && adresse.trim().length() != 0 ) {
-			if ( !adresse.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) { 
-				return "Veuillez saisir une adresse valide";
-			} 
-		} else { 
-			return null; 
-		}
+		// TODO Auto-generated method stub
 		return null ;
 	}
 
@@ -219,24 +209,24 @@ public class ProposerTrajet extends HttpServlet {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private String validateHeure(String heure) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private String validateNbPlace(String nbplace) {
 		if ( nbplace != null && nbplace.trim().length() != 0 ) {
-				int i = Integer.parseInt(nbplace);
-				if (0<i && i<5){
-					return null;
-				} else {
-					return "Vous pouvez proposer 1 à 4 places";
-				}
+			int i = Integer.parseInt(nbplace);
+			if (0<i && i<5){
+				return null;
+			} else {
+				return "Vous pouvez proposer 1 à 4 places";
+			}
 		} else {
 			return "Veuillez entrer le nombre de places que vous proposez";
 		}
-		
+
 	}
 
 }

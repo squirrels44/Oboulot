@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.squirrels.oboulot.bean.User;
+import com.squirrels.oboulot.service.UserService;
+import com.squirrels.oboulot.service.ValidationUser;
 
 
 /**
@@ -30,14 +32,16 @@ public class Inscription extends HttpServlet {
 	public static final String ECHEC = "Echec de l'inscription";
 	public static String actionMessage;
 	User newUser=null;
+	ValidationUser validationUser;
+	UserService userService; 
 
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Inscription() {
-        super();
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Inscription() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,31 +54,29 @@ public class Inscription extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 		ServletContext application = request.getServletContext();
-		
+
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
 		String pwd2 = request.getParameter(FIELD_PWD2);
 		String name = request.getParameter(FIELD_NAME);
 		String tel = request.getParameter(FIELD_TEL);
+
+
 		
-		Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");
-		if(users==null){
-			users = new HashMap<String, User>();
-			User admin = new User("Admin", "admin@gmail.com", "123456", "0611223344");
-			users.put("Admin", admin);
-			application.setAttribute( "users", users );
-		}
+		//On va vérifier que la liste user existe et si elle existe  
+		Map<String, User> users = UserService.getInstance().getUserMap();
+//		Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");		
 		
 		HashMap<String, String>erreurs = new HashMap<String, String>();
 		HashMap<String, String>form = new HashMap<String, String>();
-		
+
 		newUser = new User(name,email,pwd1, tel);
 		request.setAttribute("newUser", newUser);
-		
-		String errEmail = validateEmail(email) ;
+
+		String errEmail = validationUser.validateEmailInscription(email) ;
 		if(errEmail!=null){
 			erreurs.put(FIELD_EMAIL, errEmail);
 			form.put(FIELD_EMAIL, null);
@@ -83,8 +85,8 @@ public class Inscription extends HttpServlet {
 			form.put(FIELD_EMAIL, email);
 			actionMessage = SUCCES;
 		}
-		
-		String errPwd = validatePwd(pwd1, pwd2) ;
+
+		String errPwd = validationUser.validatePwdInscription(pwd1, pwd2) ;
 		if(errPwd!=null){
 			erreurs.put(FIELD_PWD1, errPwd);
 			form.put(FIELD_PWD1, null);
@@ -98,8 +100,8 @@ public class Inscription extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
-		String errName = validateName(name, users) ;
+
+		String errName = validationUser.validateNameInscription(name, users) ;
 		if(errName!=null){
 			erreurs.put(FIELD_NAME, errName);
 			form.put(FIELD_NAME, null);
@@ -113,8 +115,8 @@ public class Inscription extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
-		String errTel = validateTel(tel) ;
+
+		String errTel = validationUser.validateTelInscription(tel) ;
 		if(errTel!=null){
 			erreurs.put(FIELD_TEL, errTel);
 			form.put(FIELD_TEL, null);
@@ -128,11 +130,11 @@ public class Inscription extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-		
+
 		request.setAttribute("form", form);
 		request.setAttribute("erreurs", erreurs);
 		request.setAttribute("actionMessage", actionMessage);
-		
+
 		if (actionMessage.equals(SUCCES)){
 			users.put(newUser.getName(), newUser);
 			application.setAttribute( "users", users );
@@ -141,62 +143,12 @@ public class Inscription extends HttpServlet {
 			dispat.forward(request,response);
 		} else{
 			request.setAttribute("errorStatus", false); 
-			
+
 			//RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
 			//dispat.forward(request,response);
-			
-			response.sendRedirect("inscription");
-		
-		}
-	}
-	
-	
-	private String validateEmail( String email ){ 
-		if ( email != null && email.trim().length() != 0 ) {
-			if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) { 
-				return "Veuillez saisir une adresse mail valide";
-			} 
-		} else { 
-			return "L'adresse mail est obligatoire"; 
-		}
-		return null ;
-	}
-	
-	private String validatePwd(String pwd1, String pwd2){
-		if (pwd1 != null && pwd1.trim().length() > 5){
-			if (pwd2 != null && pwd2.trim().length() != 0){
-				if (!pwd1.equals(pwd2)){
-					return "La confirmation du mot de passe est invalide";
-				}
-			} else{
-				return "Veuillez confirmer votre mot de passe";
-			}
-		} else {
-			return "Le mot de passe est obligatoire et doit contenir au moins 6 caractères";
-		}
-		return null;
-	}
-	
-	private String validateTel( String tel ){ 
-		if ( tel != null && tel.trim().length() == 10 ) {
-			if ( !tel.startsWith("0")) { 
-				return "Veuillez saisir un numéro de téléphone valide";
-			} 
-		} else { 
-			return "Le numéro de téléphone est obligatoire"; 
-		}
-		return null ;
-	}
-	
-	private String validateName( String name, Map<String, User> users ){ 
-		if ( name != null && name.trim().length() != 0 ) {
-			if (users.keySet().contains(name)){
-				return "Ce nom est déjà utilisé";
-			}
-		} else { 
-			return "Le nom d'utilisateur est obligatoire"; 
-		}
-		return null ;
-	}
 
+			response.sendRedirect("inscription");
+
+		}
+	}
 }

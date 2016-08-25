@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.squirrels.oboulot.bean.User;
+import com.squirrels.oboulot.service.UserService;
 import com.squirrels.oboulot.service.ValidationInterface;
 import com.squirrels.oboulot.service.ValidationNo;
+import com.squirrels.oboulot.service.ValidationUser;
+
 
 /**
  * Servlet implementation class Login
@@ -27,8 +30,10 @@ public class Connexion extends HttpServlet {
 	public static String VIEW_PAGES_URL2="/index.jsp";
 	public static final String FIELD_PWD = "pwd";
 	public static final String FIELD_NAME = "name";
-
+	
+	ValidationUser validationUser;
 	ValidationInterface validator;
+	
 
 	public ValidationInterface getValidator() {
 		if(validator==null){
@@ -62,18 +67,22 @@ public class Connexion extends HttpServlet {
 		@SuppressWarnings("unused")
 		PrintWriter out = response.getWriter();
 
-		//Accés aux parametres de connexion
+		//Accés aux parametres de connexion (rentrés par l'utilisateur : connexion)
 		String pwd = request.getParameter(FIELD_PWD);
 		String name = request.getParameter(FIELD_NAME);
-
 		
+		//Accès aux parametres de connexion (rentrés par l'utilisateur : inscription)
+		String nameInscription = request.getParameter(Inscription.FIELD_NAME);
+		String pwdInscription = request.getParameter(Inscription.FIELD_PWD1);
+
+
 		Map<String, String> form = new HashMap<String, String>(); 
 
 		//Traitement des erreurs
 		Map<String, String> erreurs = new HashMap<String, String>();
 		String actionMessage = "";
-		String errName = validateName(name);
-		String errPwd = validatePwd(pwd);
+		String errName = validationUser.validateNameConnexion(name, nameInscription);
+		String errPwd = validationUser.validatePwdConnexion(pwd, pwdInscription);
 
 		//Si le message d'erreur n'est pas null
 		if(errPwd!=null){	
@@ -91,15 +100,19 @@ public class Connexion extends HttpServlet {
 
 			// L'utilisateur existe ! Donc il est dans users (SessionScope)
 			User connectedUser= null;
-			Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");
-				
 			
+			//On crée le singleton s'il n'existe pas
+			UserService userService = UserService.getInstance();
+			
+			//On va chercher l'attribut dans la classe UserService
+			Map<String, User> users = userService.getUserMap();
+			
+			//Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");
+
 			connectedUser= users.get(name);
 			session.setAttribute("connectedUser", connectedUser);
 			actionMessage ="Bienvenue " + connectedUser.getName() + ", Besoin d'un covoiturage ?";
 			request.setAttribute("actionMessage", actionMessage); 
-			
-
 
 
 
@@ -122,21 +135,5 @@ public class Connexion extends HttpServlet {
 
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 		}
-	}
-
-	private String validateName(String name){
-		String res = null;
-		ValidationInterface vi=getValidator();
-		res=vi.validateField(FIELD_NAME, name);
-		return res ;
-	}
-
-	//TODO : récupérer la méthode de validation de charlotte pour faire coorespondre le nom inscrit et logué.
-
-	private String validatePwd(String pwd) {
-		String res = null;
-		ValidationInterface vi=getValidator();
-		res=vi.validateField(FIELD_PWD, pwd);
-		return res ;
 	}
 }

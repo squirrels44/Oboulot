@@ -32,7 +32,7 @@ public class Inscription extends HttpServlet {
 	public static final String ECHEC = "Echec de l'inscription";
 	public static String actionMessage;
 	User newUser=null;
-	ValidationUser validationUser;
+	ValidationUser validationUser =new ValidationUser();
 	UserService userService; 
 
 
@@ -136,7 +136,7 @@ public class Inscription extends HttpServlet {
 		request.setAttribute("actionMessage", actionMessage);
 
 		if (actionMessage.equals(SUCCES)){
-			userService.addUser(newUser);
+			UserService.getInstance().addUser(newUser);
 			application.setAttribute( "users", users );
 			session.setAttribute("connectedUser", newUser);
 			RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");
@@ -144,10 +144,10 @@ public class Inscription extends HttpServlet {
 		} else{
 			request.setAttribute("errorStatus", false); 
 
-			//RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
-			//dispat.forward(request,response);
+			RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
+			dispat.forward(request,response);
 
-			response.sendRedirect("inscription");
+			
 
 		}
 	}

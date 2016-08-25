@@ -3,6 +3,7 @@ package com.squirrels.oboulot.ctrl;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,8 @@ public class Deconnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		session.setAttribute("connectedUser", null);
+		RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");
+		dispat.forward(request,response);
 	}
 
 	/**

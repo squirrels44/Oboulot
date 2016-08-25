@@ -31,8 +31,9 @@ public class Connexion extends HttpServlet {
 	public static final String FIELD_PWD = "pwd";
 	public static final String FIELD_NAME = "name";
 	
-	ValidationUser validationUser;
+	
 	ValidationInterface validator;
+	ValidationUser validationUser =new ValidationUser();
 	
 
 	public ValidationInterface getValidator() {
@@ -61,7 +62,7 @@ public class Connexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session=request.getSession();
-		ServletContext application = request.getServletContext();
+		//ServletContext application = request.getServletContext();
 
 		response.setContentType("text/html;charset=UTF-8");
 		@SuppressWarnings("unused")

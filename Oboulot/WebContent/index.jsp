@@ -67,28 +67,34 @@
 						<li><a href="#" data-toggle="modal" data-target="#parametres"><i class="fa fa-fw fa-gear"></i> Paramètres</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Se déconnecter </a></li>
+						<li><a href="Deconnexion"><i class="fa fa-fw fa-power-off"></i> Se déconnecter </a></li>
 					</ul></li>
 					</c:if>
-					
-				<c:if test="${sessionScope.connectedUser==null}">
-				<li class="dropdown"><a href="#" 
-					data-toggle="modal" data-target="#connecter">Se connecter</a>
-				</li>
-				</c:if>
-				
-				<c:if test="${sessionScope.connectedUser==null}">
-				<li class="dropdown"><a href="#"
-					data-toggle="modal" data-target="#inscrire">S'inscrire</a>
-				</li>
-				</c:if>
-				
 			</ul>
+			
+			
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li><a href="index.jsp" data-toggle="collapse" data-target="#Rechercher"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
+					<c:if test="${sessionScope.connectedUser==null}">
+						<li><a href="javascript:;" data-toggle="collapse" data-target="#Connecter"><i class="fa fa-fw fa-search"></i>Se connecter<i class="fa fa-fw fa-caret-down"></i></a>
+							<div class="collapse" id="Connecter" role="dialog">
+          						<c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import>
+							</div>
+						</li>
+					</c:if>
+				
+				<c:if test="${sessionScope.connectedUser==null}">
+					<li><a href="javascript:;" data-toggle="collapse" data-target="#Inscrire"><i class="fa fa-fw fa-search"></i>S'inscrire<i class="fa fa-fw fa-caret-down"></i></a>
+						<div class="collapse" id="Inscrire" role="dialog">
+							<c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import>
+						</div>
+					</li>
+				</c:if>
+					
+					
+					<li><a href="javascript:;" data-toggle="collapse" data-target="#Rechercher"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Rechercher" class="collapse">
-							<%-- <c:import url="/WEB-INF/trajet/recherche.jsp"></c:import> --%>
+							<c:import url="/WEB-INF/trajet/formulaireRechercherTrajet.jsp"></c:import>
 						</div>
 					</li>
 					
@@ -99,6 +105,10 @@
 						</div>
 					</li>
 					</c:if>
+					
+					
+					
+					
 				</ul>
 			</div>
 		</nav>
@@ -117,26 +127,7 @@
 	<script src="js/plugins/morris/morris.min.js"></script>
 	<script src="js/plugins/morris/morris-data.js"></script>
 
-<div class="modal fade" id="inscrire" role="dialog">
-	<div class="modal-dialog">
-      	<div class="modal-content">
-     		<div class="modal-body">
-        		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import>
-        	</div>
-      	</div>
-    </div>
-</div>
-<div class="modal fade" id="connecter" role="dialog">
-	<div class="modal-dialog">
-      	<div class="modal-content">
-     		<div class="modal-body">
-        		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import>
-        	</div>
-      	</div>
-    </div>
-</div>
+
 <div class="modal fade" id="profil" role="dialog">
 	<div class="modal-dialog">
       	<div class="modal-content">

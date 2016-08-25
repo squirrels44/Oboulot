@@ -14,14 +14,14 @@ public class UserService {
 
 	
 	//Lazy-loading : on créé la map si elle n'existe pas. 
-	public  HashMap<String, User>  getUserMap(){
+	public Map<String, User>  getUserMap(){
 		if(userMap==null){
 			userMap = new HashMap<String, User>();
-			User admin = new User("Admin", "admin@gmail.com", "123456", "0611223344");
-			userMap.put("Admin", admin);
+			//User admin = new User("Admin", "admin@gmail.com", "123456", "0611223344");
+			//userMap.put("Admin", admin);
 		}
 		//On ne peut modifier la liste d'utilisateurs en dehors de la couche service. 
-		HashMap<String, User> res=(HashMap<String, User>) Collections.unmodifiableMap(this.userMap);
+		Map<String, User> res= Collections.unmodifiableMap(userMap);
 		return res;
 	}
 	

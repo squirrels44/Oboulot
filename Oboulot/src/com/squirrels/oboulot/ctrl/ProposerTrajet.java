@@ -77,15 +77,15 @@ public class ProposerTrajet extends HttpServlet {
 		Map<String, Trajet> trajets = (HashMap<String, Trajet>) application.getAttribute("trajets");
 		if(trajets==null){
 			trajets = new HashMap<String, Trajet>();
-			Trajet admin = new Trajet("2 rue Crucy, Nantes", "Mail Pablo Picasso");
+			Trajet admin = new Trajet("2 rue Crucy, Nantes", "Mail Pablo Picasso", "");
 			trajets.put("Admin", admin);
-			application.setAttribute( "users", trajets );
+			application.setAttribute( "users", trajets ); //TODO Erreur? avec "users"?
 		}
 
 		HashMap<String, String>erreurs = new HashMap<String, String>();
 		HashMap<String, String>form = new HashMap<String, String>();
 
-		newTrajet = new Trajet(ptdepart,ptarrivee);
+		newTrajet = new Trajet(ptdepart,ptarrivee, "");
 		request.setAttribute("newTrajet", newTrajet);
 
 		String errPtDepart = validateAdresse(ptdepart) ;

@@ -91,11 +91,14 @@
 							<%-- <c:import url="/WEB-INF/trajet/recherche.jsp"></c:import> --%>
 						</div>
 					</li>
+					
+					<c:if test="${sessionScope.connectedUser!=null}">
 					<li><a href="javascript:;" data-toggle="collapse" data-target="#Proposer"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Proposer" class="collapse">
 							<c:import url="/WEB-INF/trajet/formulaireProposerTrajet.jsp"></c:import>
 						</div>
 					</li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>

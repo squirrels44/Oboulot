@@ -4,10 +4,12 @@ public class Trajet {
 	
 	private String ptdepart;
 	private String ptarrivee;
+	private String ptintermediaire;
 
-	public Trajet(String ptdepart, String ptarrivee) {
+	public Trajet(String ptdepart, String ptarrivee, String ptintermediaire) {
 		this.ptdepart = ptdepart;
 		this.ptarrivee = ptarrivee;
+		this.ptintermediaire = ptintermediaire;
 	}
 
 	public String getPtdepart() {
@@ -24,6 +26,14 @@ public class Trajet {
 
 	public void setPtarrivee(String ptarrivee) {
 		this.ptarrivee = ptarrivee;
+	}
+	
+	public String getPtintermediaire() {
+		return ptintermediaire;
+	}
+
+	public void setPtintermediaire(String ptintermediaire) {
+		this.ptintermediaire = ptintermediaire;
 	}
 
 }

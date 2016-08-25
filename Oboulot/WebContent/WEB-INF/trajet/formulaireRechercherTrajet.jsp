@@ -4,10 +4,10 @@
 			<table>
 			<tr>
 			<td>	<label for="ptdepart">Adresse de départ<span class="requis">*</span></label> 
-			</td><td>	<input type="text" id="ptdepart" name="ptdepart" value="${form['ptdepart']}"/><span class="error">${erreurs['ptdepart']}</span><br />
+			</td><td>	<input type="text" id="ptdepart" name="ptdepart" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptdepart']}"/><span class="error">${erreurs['ptdepart']}</span><br />
 			</td></tr><tr>
 			<td>	<label for="ptarrivee">Adresse d'arrivée<span class="requis">*</span></label>
-			</td><td>	<input type="text" id="ptarrivee" name="ptarrivee" value="${form['ptarrivee']}" /> <span class="error">${erreurs['ptarrivee']}</span> <br />
+			</td><td>	<input type="text" id="ptarrivee" name="ptarrivee" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptarrivee']}" /> <span class="error">${erreurs['ptarrivee']}</span> <br />
 			</td></tr><tr>	
 			<td>	<label for="date">Date du trajet<span class="requis">*</span></label>
 			</td><td>	<input type="date" id="date" name="date" value="${form['date']}" /> <span class="error">${erreurs['date']}</span> <br />

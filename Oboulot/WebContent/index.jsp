@@ -91,11 +91,14 @@
 							<%-- <c:import url="/WEB-INF/trajet/recherche.jsp"></c:import> --%>
 						</div>
 					</li>
+					
+					<c:if test="${sessionScope.connectedUser!=null}">
 					<li><a href="javascript:;" data-toggle="collapse" data-target="#Proposer"><i class="fa fa-fw fa-road"></i>Proposer<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Proposer" class="collapse">
 							<c:import url="/WEB-INF/trajet/formulaireProposerTrajet.jsp"></c:import>
 						</div>
 					</li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>
@@ -119,7 +122,7 @@
       	<div class="modal-content">
      		<div class="modal-body">
         		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import></a>
+          		<c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import>
         	</div>
       	</div>
     </div>
@@ -129,7 +132,7 @@
       	<div class="modal-content">
      		<div class="modal-body">
         		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<a href="#"><c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import></a>
+          		<c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import>
         	</div>
       	</div>
     </div>

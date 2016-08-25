@@ -1,23 +1,27 @@
 	<form method="POST" action="formPropositionTrajet">
 			<p>Vous pouvez proposer votre trajet via ce formulaire.</p>
-			<div>
-				<label for="ptdepart">Adresse de départ<span class="requis">*</span></label> 
-				<input type="text" id="ptdepart" name="ptdepart" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptdepart']}"/><span class="error">${erreurs['ptdepart']}</span><br />
-				
-				<label for="ptarrivee">Adresse d'arrivée<span class="requis">*</span></label>
-				<input type="text" id="ptarrivee" name="ptarrivee" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptarrivee']}" /> <span class="error">${erreurs['ptarrivee']}</span> <br />
-				
-				<label for="ptpassage">Adresse d'un point de passage</label>
-				<input type="text"  id="ptpassage" name="ptpassage" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptpassage']}" /> <span class="error">${erreurs['ptpassage']}</span> <br />
-				
-				<label for="date">Date du trajet<span class="requis">*</span></label>
-				<input type="date" name="date" value="${form['date']}" /> <span class="error">${erreurs['date']}</span> <br />
-				
-				<label for="heure">Heure de départ<span class="requis">*</span></label>
-				<input type="time" name="heure" value="${form['heure']}" /> <span class="error">${erreurs['heure']}</span> <br />
-		
-				<label for="nbplace">Nombre de places disponibles<span class="requis">*</span></label> 
-				<input type="number" min="1" max="4" name="nbplace" value="${form['nbplace']}" /><br />
+			<fieldset >
+			<table>
+			<tr>
+			<td>	<label for="ptdepart">Adresse de départ<span class="requis">*</span></label> 
+			</td><td>	<input type="text" id="ptdepart" name="ptdepart" value="${form['ptdepart']}"/><span class="error">${erreurs['ptdepart']}</span><br />
+			</td></tr><tr>
+			<td>	<label for="ptarrivee">Adresse d'arrivée<span class="requis">*</span></label>
+			</td><td>	<input type="text" id="ptarrivee" name="ptarrivee" value="${form['ptarrivee']}" /> <span class="error">${erreurs['ptarrivee']}</span> <br />
+			</td></tr><tr>	
+			<td>	<label for="ptpassage">Adresse d'un point de passage</label>
+			</td><td>	<input type="text" id="ptpassage" name="ptpassage" value="${form['ptpassage']}" /> <span class="error">${erreurs['ptpassage']}</span> <br />
+			</td></tr><tr>	
+			<td>	<label for="date">Date du trajet<span class="requis">*</span></label>
+			</td><td>	<input type="date" id="date" name="date" value="${form['date']}" /> <span class="error">${erreurs['date']}</span> <br />
+			</td></tr><tr>	
+			<td>	<label for="heure">Heure de départ<span class="requis">*</span></label>
+			</td><td>	<input type="time" id="heure" name="heure" value="${form['heure']}" /> <span class="error">${erreurs['heure']}</span> <br />
+			</td></tr><tr>
+			<td>	<label for="nbplace">Nombre de places disponibles<span class="requis">*</span></label> 
+			</td><td>	<input type="number" min="1" max="4" id="nbplace"  name="nbplace" value="${form['nbplace']}" /><br />
+			</td></tr>	
+			</table>
 				
 				<label for="fumeur">Fumeur :</label><br />
 				<input type="radio" name="fumeur" value="NonFumeur" checked>

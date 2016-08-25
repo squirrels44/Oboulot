@@ -2,13 +2,13 @@
 			<p>Vous pouvez proposer votre trajet via ce formulaire.</p>
 			<div>
 				<label for="ptdepart">Adresse de départ<span class="requis">*</span></label> 
-				<input type="text" name="ptdepart" value="${form['ptdepart']}"/><span class="error">${erreurs['ptdepart']}</span><br />
+				<input type="text" id="ptdepart" name="ptdepart" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptdepart']}"/><span class="error">${erreurs['ptdepart']}</span><br />
 				
 				<label for="ptarrivee">Adresse d'arrivée<span class="requis">*</span></label>
-				<input type="text" name="ptarrivee" value="${form['ptarrivee']}" /> <span class="error">${erreurs['ptarrivee']}</span> <br />
+				<input type="text" id="ptarrivee" name="ptarrivee" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptarrivee']}" /> <span class="error">${erreurs['ptarrivee']}</span> <br />
 				
 				<label for="ptpassage">Adresse d'un point de passage</label>
-				<input type="text" name="ptpassage" value="${form['ptpassage']}" /> <span class="error">${erreurs['ptpassage']}</span> <br />
+				<input type="text"  id="ptpassage" name="ptpassage" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptpassage']}" /> <span class="error">${erreurs['ptpassage']}</span> <br />
 				
 				<label for="date">Date du trajet<span class="requis">*</span></label>
 				<input type="date" name="date" value="${form['date']}" /> <span class="error">${erreurs['date']}</span> <br />

@@ -136,7 +136,7 @@ public class Inscription extends HttpServlet {
 		request.setAttribute("actionMessage", actionMessage);
 
 		if (actionMessage.equals(SUCCES)){
-			users.put(newUser.getName(), newUser);
+			userService.addUser(newUser);
 			application.setAttribute( "users", users );
 			session.setAttribute("connectedUser", newUser);
 			RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");

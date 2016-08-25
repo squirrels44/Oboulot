@@ -1,4 +1,4 @@
-<form method="POST" action="formInscription">
+<form method="POST" action="fInscription">
 			<div>
 				<label for="name">Nom d'utilisateur<span class="requis">*</span></label> 
 				<input type="text" name="name" value="${form['name']}"/><span class="error">${erreurs['name']}</span><br />

@@ -17,7 +17,7 @@ import com.squirrels.oboulot.bean.User;
 /**
  * Servlet implementation class Inscription
  */
-@WebServlet("/formInscription")
+@WebServlet("/fInscription")
 public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/index.jsp";
@@ -141,8 +141,12 @@ public class Inscription extends HttpServlet {
 			dispat.forward(request,response);
 		} else{
 			request.setAttribute("errorStatus", false); 
-			RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
-			dispat.forward(request,response);
+			
+			//RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
+			//dispat.forward(request,response);
+			
+			response.sendRedirect("inscription");
+		
 		}
 	}
 	

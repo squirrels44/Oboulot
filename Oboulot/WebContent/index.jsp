@@ -122,7 +122,7 @@
       	<div class="modal-content">
      		<div class="modal-body">
         		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<a href="#"><c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import></a>
+          		<c:import url="/WEB-INF/compte/formulaireInscription.jsp"></c:import>
         	</div>
       	</div>
     </div>
@@ -132,7 +132,7 @@
       	<div class="modal-content">
      		<div class="modal-body">
         		<button type="button" class="close" data-dismiss="modal">&times;</button>
-          		<a href="#"><c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import></a>
+          		<c:import url="/WEB-INF/compte/formulaireConnexion.jsp"></c:import>
         	</div>
       	</div>
     </div>

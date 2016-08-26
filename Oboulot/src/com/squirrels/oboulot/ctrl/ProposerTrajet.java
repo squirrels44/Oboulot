@@ -73,7 +73,7 @@ public class ProposerTrajet extends HttpServlet {
 			trajets = new HashMap<String, Trajet>();
 			Trajet admin = new Trajet("2 rue Crucy, Nantes", "Mail Pablo Picasso", "");
 			trajets.put("Admin", admin);
-			application.setAttribute( "users", trajets ); //TODO Erreur? avec "users"?
+			application.setAttribute( "trajets", trajets );
 		}
 
 		HashMap<String, String>erreurs = new HashMap<String, String>();

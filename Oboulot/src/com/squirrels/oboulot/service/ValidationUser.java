@@ -72,33 +72,27 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 	//critere de validation du nom de connexion
 	public String validateNameConnexion(String name, Map<String, User> users){
 		String res = null;
-		if(name ==null || name.trim().length() == 0){
-			res = "Veuillez saisir un identifiant valide";
-		}else if (users.keySet().contains(name)){
-			return res; 
-		}else{res = "Nom invalide";
-		
-		} 
+		if(name !=null && name.trim().length() != 0){
+			if (users.keySet().contains(name)){
+				return res;
+			} else { res = "Identifiant erronné" ;}
+		}else{res = "Veuillez saisir un identifiant";
 
-		return res;
+		}
+		return res ;
 	}
-
-
 
 	//critere de validation du mot de passe de connexion
 	public String validatePwdConnexion(String pwd, Map<String, User> users) {
 		String res = null;
-		if(pwd ==null || pwd.trim().length() == 0){
-			res = "Veuillez saisir un mot de passe valide";
-		}else if (users.keySet().contains(pwd)){
-			return res; 
-		}else{res = "Mot de passe erronné";
-		
-		} 
+		if(pwd !=null && pwd.trim().length() != 0){
+			if (users.keySet().contains(pwd)){
+				return res;
+			} else { res = "Mot de passe erronné" ;}
+		}else{res = "Veuillez saisir un Mot de passe";
 
-		return res;
+		}
+		return res ;
 	}
-
-
 
 }

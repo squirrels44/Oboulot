@@ -7,13 +7,14 @@ var map,geocoder, marker, marker2; // La carte, le service de géocodage et les 
 var depart,arrivee,pointCheck; // point de départ, arrivé et de vérification
 
 
+
 //on lance l'initialisation dès le démarrage pour avoir une carte 
 init(); 
 
-//récupération des données du Bean Trajet
-depart = Trajet.getPointDepart();
-arrivee = Trajet.getPointArrivee();
-intermediaire = Trajet.getPointIntermediaire();
+////récupération des données du Bean Trajet
+//depart = Trajet.getPointDepart();
+//arrivee = Trajet.getPointArrivee();
+//intermediaire = Trajet.getPointIntermediaire();
 
 /*initialise google MAP V3*/
 function init() {
@@ -56,24 +57,40 @@ function trouveRoute() {
 
 	/*test si les variables sont bien initialisés*/
 	if (depart && arrivee){
+		//liste pour contenir tous les points de l'itinéraire en latitude et longitude
+
+
+
 		  var request = {
 				    origin:depart,
 				    destination:arrivee,
-					//waypoints:intermediaire, //les wayPoints sont dans les options disponibles ils représentent des points de passage
+				//waypoints:intermediaire, //les wayPoints sont dans les options disponibles ils représentent des points de passage
 				    travelMode: google.maps.DirectionsTravelMode["DRIVING"]
 		  };
 		  /*appel à l'API Google pour tracer l'itinéraire*/
-		  directionsService.route(request, function(response, status) {
-			    if (status == google.maps.DirectionsStatus.OK) {
+		  directionsService.route(request, function(response, status) 
+				{
+			    if (status == google.maps.DirectionsStatus.OK) 
+			{
 				      directionsDisplay.setDirections(response);
-				var monTrajet=response.routes[0] ;
+				var monTrajet=response.routes["0"] ; 
 				var point0=monTrajet.overview_path[0];
-				var latPoint0=point0.lat(); // Latitude de départ du premier segment
-				var longPoint0=point0.lng(); // Longitude de départ du premier segment 
+				var pointsTrajet = new Array();
+				for (var int = 0; int < monTrajet.overview_path.length; int++) 
+				{
+					point=monTrajet.overview_path[int];
+					var latPoint=point.lat(); // Latitude de départ du premier segment
+					var longPoint=point.lng(); // Longitude de départ du premier segment 
+					var pointsLatLong = {"latitude":latPoint,"longitude":longPoint};
+					//une liste pour contenir tous les points de l'itinéraire en latitude et longitude
+					pointsTrajet.push(pointsLatLong)
+				}
 				    }
 			  });
 	}
 }
+
+
 
 function calculateAndDisplayRoute(src,src2){
 	/**
@@ -81,6 +98,8 @@ function calculateAndDisplayRoute(src,src2){
 	 * Remarque : on appelle trouveRoute() à la fin de chaque géocodage car on ne sait pas quelle requête sera répondue en premier
 	 * L'appel à trouveRoute() ne peut pas se faire en dehors du bloc de géocodage car utilise des variables locales
 	 */
+
+
 	//
 	if (geocoder) {
 		//géocodage de la première adresse
@@ -140,7 +159,7 @@ function calculateAndDisplayRouteWithIntermediate(src,src2, srcInt){
 				      /*on remplace l'adresse par celle fournie du geocoder*/
 				      document.getElementById(src).value = results[0].formatted_address;
 				      depart = results[0].formatted_address;
-				      /*trace la route*/
+				      /*trouve et trace la route*/
 				      trouveRoute();
 				    }
 			  });
@@ -155,7 +174,7 @@ function calculateAndDisplayRouteWithIntermediate(src,src2, srcInt){
 				      /*on remplace l'adresse par celle fournie du geocoder*/
 				        document.getElementById(src2).value = results[0].formatted_address;
 				      arrivee = results[0].formatted_address;
-				      /*trace la route*/
+				      /*trouve et trace la route*/
 				      trouveRoute();
 				    }
 			  });
@@ -170,7 +189,7 @@ function calculateAndDisplayRouteWithIntermediate(src,src2, srcInt){
 				      /*on remplace l'adresse par celle fournie du geocoder*/
 				        document.getElementById(srcInt).value = results[0].formatted_address;
 				      intermediaire = results[0].formatted_address;
-				      /*trace la route*/
+				      /*trouve et trace la route*/
 				      trouveRoute();
 				    }
 			  });

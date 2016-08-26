@@ -20,8 +20,7 @@
 		<div style="color: #FF0000">${erreurs['email']}</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-6" for="tel">Numéro de
-			téléphone<span class="requis">*</span>
+		<label class="control-label col-sm-6" for="tel">Numéro de téléphone<span class="requis">*</span>
 		</label>
 		<div class="col-sm-6">
 			<input class="form-control" type="text" id="tel" name="tel"
@@ -33,8 +32,7 @@
 		<label class="control-label col-sm-6" for="pwd1">Mot de passe<span
 			class="requis">*</span></label>
 		<div class="col-sm-6">
-			<input class="form-control" type="password" id="pwd1" name="pwd1"
-				value="${form['pwd1']}" />
+			<input class="form-control" type="password" id="pwd1" name="pwd1" />
 		</div>
 	</div>
 	<div class="form-group">

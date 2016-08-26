@@ -104,7 +104,6 @@ public class Inscription extends HttpServlet {
 			form.put(FIELD_PWD1, null);
 			actionMessage = ECHEC;
 		} else {
-			form.put(FIELD_PWD1, pwd1);
 			if (actionMessage.equals(ECHEC)){
 				actionMessage=ECHEC;
 			}

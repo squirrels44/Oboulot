@@ -23,7 +23,7 @@ import com.squirrels.oboulot.service.ValidationTrajet;
 @WebServlet("/formPropositionTrajet")
 public class ProposerTrajet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/trajet/formulaireProposerTrajet.jsp";
+	public static String VIEW_PAGES_URL="/index.jsp";
 	//variables statiques concernant le trajet proposé
 	private static final String FIELD_DPT = "ptdepart";
 	private static final String FIELD_ARV = "ptarrivee"; 

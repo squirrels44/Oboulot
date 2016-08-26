@@ -81,8 +81,8 @@ public class Connexion extends HttpServlet {
 
 		//On crée le singleton et la map si il/elle n'existe pas
 		Map<String, User> users = UserService.getInstance().getUserMap();
-		String errName = validationUser.validateNameConnexion(name, users);
-		String errPwd = validationUser.validatePwdConnexion(pwd, users);
+		String errName = validationUser.validateNameConnexion(name);
+		String errPwd = validationUser.validatePwdConnexion(name, pwd);
 
 		//Si ya des erreurs
 		if(errPwd!=null){	

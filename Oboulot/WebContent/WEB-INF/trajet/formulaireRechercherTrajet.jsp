@@ -8,8 +8,13 @@
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-6" for="pointArrivee">Adresse d'arrivée<span class="requis">*</span></label>
+<<<<<<< HEAD
 		<div class="col-sm-5">
 			<input class="form-control" type="text" id="pointArrivee" name="pointArrivee" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointArrivee']}" />
+=======
+		<div class="col-sm-6">
+			<input class="form-control" type="text" id="pointArrivee" name="pointArrivee" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointArrivee']}"/>
+>>>>>>> 5975b238beff0db01d1b3eebeeb0d411a839fb9a
 		</div>
 		<div style="color: #FF0000">${erreurs['pointArrivee']}</div>
 	</div>

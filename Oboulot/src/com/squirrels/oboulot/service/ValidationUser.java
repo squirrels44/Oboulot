@@ -70,8 +70,9 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 	/////////////////////
 
 	//critere de validation du nom de connexion
-	public String validateNameConnexion(String name, Map<String, User> users){
+	public String validateNameConnexion(String name){
 		String res = null;
+		Map<String, User> users = UserService.getInstance().getUserMap();
 		if(name !=null && name.trim().length() != 0){
 			if (users.keySet().contains(name)){
 				return res;
@@ -83,10 +84,11 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 	}
 
 	//critere de validation du mot de passe de connexion
-	public String validatePwdConnexion(String pwd, Map<String, User> users) {
+	public String validatePwdConnexion(String name, String pwd) {
 		String res = null;
+		Map<String, User> users = UserService.getInstance().getUserMap();
 		if(pwd !=null && pwd.trim().length() != 0){
-			if (users.keySet().contains(pwd)){
+			if (pwd.equals(users.get(name).getPwd())){
 				return res;
 			} else { res = "Mot de passe erronné" ;}
 		}else{res = "Veuillez saisir un Mot de passe";

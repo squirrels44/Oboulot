@@ -1,4 +1,5 @@
 <form method="POST" action="fInscription">
+<fieldset>
 	<div class="form-group">
 		<label class="control-label col-sm-6" for="name">Nom
 			d'utilisateur<span class="requis">*</span>
@@ -20,7 +21,7 @@
 		<div style="color: #FF0000">${erreurs['email']}</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-6" for="tel">Numéro de téléphone<span class="requis">*</span>
+		<label class="control-label col-sm-6" for="tel">Téléphone<span class="requis">*</span>
 		</label>
 		<div class="col-sm-6">
 			<input class="form-control" type="text" id="tel" name="tel"
@@ -40,10 +41,12 @@
 			du mot de passe<span class="requis">*</span>
 		</label>
 		<div class="col-sm-6">
-			<input class="form-control" type="password" name="pwd2" />
+			<input class="form-control" type="password" id="pwd2" name="pwd2" />
 		</div>
 		<div style="color: #FF0000">${erreurs['pwd1']}</div>
 	</div>
+</fieldset>
+	<fieldset>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
 			<input type="submit" name="submit" value="Inscription"
@@ -55,5 +58,6 @@
 		</div>
 	</div>
 	<div style="color: #FF0000">${ actionMessage }</div>
+	</fieldset>
 </form>
 

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.squirrels.oboulot.bean.Trajet;
 import com.squirrels.oboulot.bean.User;
+import com.squirrels.oboulot.service.ValidationTrajet;
 
 /**
  * Servlet implementation class ProposerTrajet
@@ -65,7 +66,8 @@ public class ProposerTrajet extends HttpServlet {
 		String nbplace = request.getParameter(FIELD_NBPLACE);
 		String fumeur = request.getParameter(FIELD_FUMEUR);
 		String musique = request.getParameter(FIELD_MUSIQUE);
-
+		ValidationTrajet validationTrajet=new ValidationTrajet();
+		
 		Map<String, Trajet> trajets = (HashMap<String, Trajet>) application.getAttribute("trajets");
 		if(trajets==null){
 			trajets = new HashMap<String, Trajet>();
@@ -82,7 +84,7 @@ public class ProposerTrajet extends HttpServlet {
 		request.setAttribute("newTrajet", newTrajet);
 
 		//lignes de code permettants l'affichage de message d'erreur
-		String errPtDepart = validateAdresse(ptdepart) ;
+		String errPtDepart = validationTrajet.validateAdresse(ptdepart) ;
 		if(errPtDepart!=null){
 			erreurs.put(FIELD_DPT, errPtDepart);
 			form.put(FIELD_DPT, null);
@@ -92,7 +94,7 @@ public class ProposerTrajet extends HttpServlet {
 			actionMessage = SUCCES;
 		}
 
-		String errPtArrivee = validateAdresse(ptarrivee) ;
+		String errPtArrivee = validationTrajet.validateAdresse(ptarrivee) ;
 		if(errPtArrivee!=null){
 			erreurs.put(FIELD_ARV, errPtArrivee);
 			form.put(FIELD_ARV, null);
@@ -107,7 +109,7 @@ public class ProposerTrajet extends HttpServlet {
 			}
 		}
 
-		String errDate = validateDate(date) ;
+		String errDate = validationTrajet.validateDate(date) ;
 		if(errDate!=null){
 			erreurs.put(FIELD_DATE, errDate);
 			form.put(FIELD_DATE, null);
@@ -122,7 +124,7 @@ public class ProposerTrajet extends HttpServlet {
 			}
 		}
 
-		String errHeure = validateHeure(heure) ;
+		String errHeure = validationTrajet.validateHeure(heure) ;
 		if(errHeure!=null){
 			erreurs.put(FIELD_HEURE, errHeure);
 			form.put(FIELD_HEURE, null);
@@ -137,7 +139,7 @@ public class ProposerTrajet extends HttpServlet {
 			}
 		}
 
-		String errNbPlace = validateNbPlace(nbplace) ;
+		String errNbPlace = validationTrajet.validateNbPlace(nbplace) ;
 		if(errNbPlace!=null){
 			erreurs.put(FIELD_NBPLACE, errNbPlace);
 			form.put(FIELD_NBPLACE, null);
@@ -175,39 +177,6 @@ public class ProposerTrajet extends HttpServlet {
 		}
 	}
 
-	//méthode detectant l'absence d'adresse rentrée
-	private String validateAdresse(String adresse) {
-		if ( adresse != null && adresse.trim().length() != 0 ) {
-			return "L'adresse est obligatoire"; 
-		}
-		return null ;
-	}
 	
-	//méthode permettant l'affichage de message lors d'absence de date rentrée
-	private String validateDate(String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//méthode permettant l'affichage de message lors d'absence d'heure rentrée
-	private String validateHeure(String heure) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//méthode permettant l'affichage de message lors d'absence ou d'un nombre incorrect de place rentrée
-	private String validateNbPlace(String nbplace) {
-		if ( nbplace != null && nbplace.trim().length() != 0 ) {
-			int i = Integer.parseInt(nbplace);
-			if (0<i && i<5){
-				return null;
-			} else {
-				return "Vous pouvez proposer 1 à 4 places";
-			}
-		} else {
-			return "Veuillez entrer le nombre de places que vous proposez";
-		}
-
-	}
 
 }

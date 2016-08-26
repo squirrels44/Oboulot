@@ -15,12 +15,14 @@ import javax.servlet.http.HttpSession;
 
 import com.squirrels.oboulot.bean.Trajet;
 import com.squirrels.oboulot.bean.User;
+import com.squirrels.oboulot.service.ValidationTrajet;
+
 
 /**
  * Servlet implementation class RechercherTrajet
  */
 @WebServlet("/formRechercheTrajet")
-public class RechercherTrajet extends HttpServlet {
+public class RechercherTrajet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/trajet/formulaireRechercherTrajet.jsp";
 	public static final String FIELD_DPT = "ptdepart";
@@ -66,7 +68,8 @@ public class RechercherTrajet extends HttpServlet {
 		String heure = request.getParameter(FIELD_HEURE);
 		String fumeur = request.getParameter(FIELD_FUMEUR);
 		String musique = request.getParameter(FIELD_MUSIQUE);
-
+		ValidationTrajet validationTrajet=new ValidationTrajet();
+		
 		Map<String, Trajet> trajetsCherchés = (HashMap<String, Trajet>) application.getAttribute("trajetsCherchés");
 		if(trajetsCherchés==null){
 			trajetsCherchés = new HashMap<String, Trajet>();
@@ -81,7 +84,7 @@ public class RechercherTrajet extends HttpServlet {
 		newTrajet = new Trajet(ptdepart,ptarrivee, "");
 		request.setAttribute("newTrajetCherché", newTrajet);
 
-		String errPtDepart = validateAdresse(ptdepart) ;
+		String errPtDepart = validationTrajet.validateAdresse(ptdepart) ;
 		if(errPtDepart!=null){
 			erreurs.put(FIELD_DPT, errPtDepart);
 			form.put(FIELD_DPT, null);
@@ -91,7 +94,7 @@ public class RechercherTrajet extends HttpServlet {
 			actionMessage = SUCCES;
 		}
 
-		String errPtArrivee = validateAdresse(ptarrivee) ;
+		String errPtArrivee = validationTrajet.validateAdresse(ptarrivee) ;
 		if(errPtArrivee!=null){
 			erreurs.put(FIELD_ARV, errPtArrivee);
 			form.put(FIELD_ARV, null);
@@ -106,7 +109,7 @@ public class RechercherTrajet extends HttpServlet {
 			}
 		}
 
-		String errDate = validateDate(date) ;
+		String errDate = validationTrajet.validateDate(date) ;
 		if(errDate!=null){
 			erreurs.put(FIELD_DATE, errDate);
 			form.put(FIELD_DATE, null);
@@ -121,7 +124,7 @@ public class RechercherTrajet extends HttpServlet {
 			}
 		}
 
-		String errHeure = validateHeure(heure) ;
+		String errHeure = validationTrajet.validateHeure(heure) ;
 		if(errHeure!=null){
 			erreurs.put(FIELD_HEURE, errHeure);
 			form.put(FIELD_HEURE, null);
@@ -156,21 +159,6 @@ public class RechercherTrajet extends HttpServlet {
 		}
 	}
 	
-	private String validateAdresse(String adresse) {
-		if ( adresse != null && adresse.trim().length() != 0 ) {
-			return "L'adresse est obligatoire"; 
-		}
-		return null ;
-	}
 	
-	private String validateDate(String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private String validateHeure(String heure) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

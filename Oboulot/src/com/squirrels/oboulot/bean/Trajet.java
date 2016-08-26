@@ -15,24 +15,24 @@ public class Trajet {
 		this.pointIntermediaire = pointIntermediaire;
 	}
 
-	public String getPtdepart() {
+	public String getPointDepart() {
 		return pointDepart;
 	}
-	public void setPtdepart(String pointDepart) {
+	public void setPointDepart(String pointDepart) {
 		this.pointDepart = pointDepart;
 	}
 
-	public String getPtarrivee() {
+	public String getPointArrivee() {
 		return pointArrivee;
 	}
-	public void setPtarrivee(String pointArrivee) {
+	public void setPointArrivee(String pointArrivee) {
 		this.pointArrivee = pointArrivee;
 	}
 	
-	public String getPtintermediaire() {
+	public String getPointIntermediaire() {
 		return pointIntermediaire;
 	}
-	public void setPtintermediaire(String pointIntermediaire) {
+	public void setPointIntermediaire(String pointIntermediaire) {
 		this.pointIntermediaire = pointIntermediaire;
 	}
 

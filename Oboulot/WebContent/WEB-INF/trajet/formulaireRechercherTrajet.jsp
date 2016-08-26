@@ -30,14 +30,14 @@
 	<div class="form-group row">
         <label class="col-sm-offset-2 col-sm-4">Préférences :</label>
         <div class="row">
-        <div class="col-sm-offset-4 col-sm-8">
-            <label><input type="radio" id="fumeur" name="fumeur" value="NonFumeur" ><img src="images/logo_non_fumeur.jpg" alt="Non fumeur" /></label>
-            <label><input type="radio" id="fumeur" name="fumeur" value="Fumeur"><img src="images/logo_fumeur.jpg" alt="Fumeur" /></label>
-        </div>
-		<div class="col-sm-offset-4 col-sm-8">
-			<label></label><input type="radio" id="musique" name="musique" value="NonMusique" >Sans musique</label>
-			<label></label><input type="radio" id="musique" name="musique" value="AvecMusique">Avec musique</label>
-		</div>
+	        <div class="col-sm-offset-4 col-sm-8">
+	            <label><input type="radio" id="fumeur" name="fumeur" value="NonFumeur" ><img src="images/logo_non_fumeur.jpg" alt="Non fumeur" /></label>
+	            <label><input type="radio" id="fumeur" name="fumeur" value="Fumeur"><img src="images/logo_fumeur.jpg" alt="Fumeur" /></label>
+	        </div>
+			<div class="col-sm-offset-4 col-sm-8">
+				<label></label><input type="radio" id="musique" name="musique" value="NonMusique" >Sans musique</label>
+				<label></label><input type="radio" id="musique" name="musique" value="AvecMusique">Avec musique</label>
+			</div>
 		</div>
 	</div>
 	<div class="form-group row">

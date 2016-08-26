@@ -4,14 +4,14 @@
 		<div class="col-sm-6">
 			<input type="text" id="pointDepart" name="pointDepart" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointDepart']}"/>
 		</div>
-		<div style="color: #FF0000">${erreurs['ptdepart']}</div>
+		<div style="color: #FF0000">${erreurs['pointDepart']}</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-6" for="pointArrivee">Adresse d'arrivée<span class="requis">*</span></label>
 		<div class="col-sm-6">
 			<input type="text" id="pointArrivee" name="pointArrivee" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointArrivee']}" />
 		</div>
-		<div style="color: #FF0000">${erreurs['ptarrivee']}</div>
+		<div style="color: #FF0000">${erreurs['pointArrivee']}</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-6" for="pointIntermediaire">Adresse d'un point de passage</label>

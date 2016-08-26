@@ -68,7 +68,7 @@ public class Connexion extends HttpServlet {
 		@SuppressWarnings("unused")
 		PrintWriter out = response.getWriter();
 
-		//Accés aux parametres de connexion (rentrés par l'utilisateur : connexion)
+		//Accés aux parametres de connexion rentrés par l'utilisateur 
 		String pwd = request.getParameter(FIELD_PWD);
 		String name = request.getParameter(FIELD_NAME);
 

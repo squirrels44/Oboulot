@@ -23,11 +23,12 @@ import com.squirrels.oboulot.service.ValidationUser;
 public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/index.jsp";
-	public static final String FIELD_NAME = "name";
-	public static final String FIELD_EMAIL = "email"; 
-	public static final String FIELD_TEL = "tel";
-	public static final String FIELD_PWD1 = "pwd1"; 
-	public static final String FIELD_PWD2 = "pwd2";
+	//Le champ "name" correspond à un login
+	private static final String FIELD_NAME = "name";
+	private static final String FIELD_EMAIL = "email"; 
+	private static final String FIELD_TEL = "tel";
+	private static final String FIELD_PWD1 = "pwd1"; 
+	private static final String FIELD_PWD2 = "pwd2";
 	public static final String SUCCES = "Succès de l'inscription";
 	public static final String ECHEC = "Echec de l'inscription";
 	public static String actionMessage;
@@ -55,9 +56,11 @@ public class Inscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//On va chercher les Scopes de session et d'application
 		HttpSession session = request.getSession();
 		ServletContext application = request.getServletContext();
-
+		
+		//On récupère ce que l'utilisateur a entré lors de son inscription
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
 		String pwd2 = request.getParameter(FIELD_PWD2);
@@ -67,15 +70,24 @@ public class Inscription extends HttpServlet {
 
 		
 		//On va vérifier que la liste user existe et si elle existe  
-		Map<String, User> users = UserService.getInstance().getUserMap();
-//		Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");		
+		Map<String, User> users = UserService.getInstance().getUserMap();		
 		
+		//Création des HashMap contenant les messages d'erreurs retourné lors des méthodes de 
+		//validation des champs ou ce qui a été rentré si pas d'erreur
 		HashMap<String, String>erreurs = new HashMap<String, String>();
 		HashMap<String, String>form = new HashMap<String, String>();
 
+		//On enregistre temporairement le nouvel utilisateur et s'il va être validé, on l'enverra
+		//sur le Scope application
 		newUser = new User(name,email,pwd1, tel);
 		request.setAttribute("newUser", newUser);
 
+		
+		//On verrifie les différents champs avec les méthodes prises dans validationUser
+		//s'il y a une erreur, on rentre le message dans la map erreurs, sinon on entre ce
+		//qu'a donné l'utilisateur dans la map form. "actionMessage" permet de savoir au final 
+		//si tout est validé ou s'il existe une ou plusieurs erreurs
+		
 		String errEmail = validationUser.validateEmailInscription(email) ;
 		if(errEmail!=null){
 			erreurs.put(FIELD_EMAIL, errEmail);
@@ -135,20 +147,19 @@ public class Inscription extends HttpServlet {
 		request.setAttribute("erreurs", erreurs);
 		request.setAttribute("actionMessage", actionMessage);
 
+		//S'il n'y a pas d'erreur, on ajoute un nouvel utilisateur dans le Scope d'application,
+		//on le connecte, et on le redirige vers la page index
 		if (actionMessage.equals(SUCCES)){
 			UserService.getInstance().addUser(newUser);
 			application.setAttribute( "users", users );
 			session.setAttribute("connectedUser", newUser);
 			RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");
 			dispat.forward(request,response);
+		//S'il y a des erreurs, on affiche des messages d'erreurs à coté des champs correspondants
 		} else{
 			request.setAttribute("errorStatus", false); 
-
 			RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
 			dispat.forward(request,response);
-
-			
-
 		}
 	}
 }

@@ -7,14 +7,13 @@ var map,geocoder, marker, marker2; // La carte, le service de géocodage et les 
 var depart,arrivee,pointCheck; // point de départ, arrivé et de vérification
 
 
+//on lance l'initialisation dès le démarrage pour avoir une carte 
+init(); 
 
-init(); // on lance l'initialisation dès le démarrage pour avoir une carte 
-
+//récupération des données du Bean Trajet
 depart = Trajet.getPointDepart();
 arrivee = Trajet.getPointArrivee();
 intermediaire = Trajet.getPointIntermediaire();
-
-wayPoints=new Array(intermediaire);
 
 /*initialise google MAP V3*/
 function init() {
@@ -52,6 +51,7 @@ function init() {
 function trouveRoute() {
 	/**
 	 * La fonction calcule l'intinéraire puis l'affiche
+	 * Appel automatisé dans calculateAndDisplayRoute et calculateAndDisplayRouteWithIntermediate
 	 */
 
 	/*test si les variables sont bien initialisés*/
@@ -59,7 +59,7 @@ function trouveRoute() {
 		  var request = {
 				    origin:depart,
 				    destination:arrivee,
-				//waypoints:wayPoints, //les wayPoints sont dans les options disponibles ils représentent des points de passage
+					//waypoints:intermediaire, //les wayPoints sont dans les options disponibles ils représentent des points de passage
 				    travelMode: google.maps.DirectionsTravelMode["DRIVING"]
 		  };
 		  /*appel à l'API Google pour tracer l'itinéraire*/

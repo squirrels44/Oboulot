@@ -60,7 +60,10 @@ public class RechercherTrajet extends HttpServlet{
 		ServletContext application = request.getServletContext();
 
 		User connectedUser = (User) session.getAttribute("connectedUser");
-		//TODO le connectedUser peut être null si en tant que visiteur
+		// le connectedUser peut être null si en tant que visiteur
+		if (connectedUser.equals(null)){
+			connectedUser = new User ("visiteur", "visiteur", "visiteur", "visiteur");
+		}
 
 		String ptdepart = request.getParameter(FIELD_DPT);
 		String ptarrivee = request.getParameter(FIELD_ARV);
@@ -70,12 +73,12 @@ public class RechercherTrajet extends HttpServlet{
 		String musique = request.getParameter(FIELD_MUSIQUE);
 		ValidationTrajet validationTrajet=new ValidationTrajet();
 		
-		Map<String, Trajet> trajetsCherchés = (HashMap<String, Trajet>) application.getAttribute("trajetsCherchés");
-		if(trajetsCherchés==null){
-			trajetsCherchés = new HashMap<String, Trajet>();
+		Map<String, Trajet> trajetsCherches = (HashMap<String, Trajet>) application.getAttribute("trajetsCherches");
+		if(trajetsCherches==null){
+			trajetsCherches = new HashMap<String, Trajet>();
 			Trajet trajadmin = new Trajet("2 rue Crucy, Nantes", "Mail Pablo Picasso", "");
-			trajetsCherchés.put("Admin", trajadmin);
-			application.setAttribute( "trajetsCherchés", trajetsCherchés );
+			trajetsCherches.put("Admin", trajadmin);
+			application.setAttribute( "trajetsCherches", trajetsCherches );
 		}
 
 		HashMap<String, String>erreurs = new HashMap<String, String>();
@@ -147,8 +150,8 @@ public class RechercherTrajet extends HttpServlet{
 		request.setAttribute("actionMessage", actionMessage);
 
 		if (actionMessage.equals(SUCCES)){
-			trajetsCherchés.put(connectedUser.getName(), newTrajet);
-			application.setAttribute( "trajetsCherchés", trajetsCherchés );
+			trajetsCherches.put(connectedUser.getName(), newTrajet);
+			application.setAttribute( "trajetsCherchés", trajetsCherches );
 			//TODO Rediriger vers une page qui affiche les trajets trouvés
 			RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");
 			dispat.forward(request,response);

@@ -23,27 +23,19 @@ import com.squirrels.oboulot.bean.User;
 public class ProposerTrajet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/trajet/formulaireProposerTrajet.jsp";
-	public static final String FIELD_DPT = "ptdepart";
-	public static final String FIELD_ARV = "ptarrivee"; 
-	public static final String FIELD_PSG = "ptpassage";
-	public static final String FIELD_DATE = "date"; 
-	public static final String FIELD_HEURE = "heure";
-	public static final String FIELD_NBPLACE = "nbplace";
-	public static final String FIELD_FUMEUR = "fumeur";
-	public static final String FIELD_MUSIQUE = "musique";
-	public static final String SUCCES = "Succès de l'inscription";
-	public static final String ECHEC = "Echec de l'inscription";
+	//variables statiques concernant le trajet proposé
+	private static final String FIELD_DPT = "ptdepart";
+	private static final String FIELD_ARV = "ptarrivee"; 
+	private static final String FIELD_PSG = "ptpassage";
+	private static final String FIELD_DATE = "date"; 
+	private static final String FIELD_HEURE = "heure";
+	private static final String FIELD_NBPLACE = "nbplace";
+	private static final String FIELD_FUMEUR = "fumeur";
+	private static final String FIELD_MUSIQUE = "musique";
+	private static final String SUCCES = "Succès de l'inscription";
+	private static final String ECHEC = "Echec de l'inscription";
 	public static String actionMessage;
 	Trajet newTrajet = null;
-
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ProposerTrajet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -85,9 +77,11 @@ public class ProposerTrajet extends HttpServlet {
 		HashMap<String, String>erreurs = new HashMap<String, String>();
 		HashMap<String, String>form = new HashMap<String, String>();
 
+		//on creer un nouveau trajet
 		newTrajet = new Trajet(ptdepart,ptarrivee, "");
 		request.setAttribute("newTrajet", newTrajet);
 
+		//lignes de code permettants l'affichage de message d'erreur
 		String errPtDepart = validateAdresse(ptdepart) ;
 		if(errPtDepart!=null){
 			erreurs.put(FIELD_DPT, errPtDepart);
@@ -105,21 +99,6 @@ public class ProposerTrajet extends HttpServlet {
 			actionMessage = ECHEC;
 		} else {
 			form.put(FIELD_ARV, ptarrivee);
-			if (actionMessage.equals(ECHEC)){
-				actionMessage=ECHEC;
-			}
-			else {
-				actionMessage=SUCCES;
-			}
-		}
-
-		String errPtPassage = validateAdresseFacultative(ptpassage) ;
-		if(errPtPassage!=null){
-			erreurs.put(FIELD_PSG, errPtPassage);
-			form.put(FIELD_PSG, null);
-			actionMessage = ECHEC;
-		} else {
-			form.put(FIELD_PSG, ptpassage);
 			if (actionMessage.equals(ECHEC)){
 				actionMessage=ECHEC;
 			}
@@ -164,7 +143,7 @@ public class ProposerTrajet extends HttpServlet {
 			form.put(FIELD_NBPLACE, null);
 			actionMessage = ECHEC;
 		} else {
-			form.put(FIELD_NBPLACE, date);
+			form.put(FIELD_NBPLACE, nbplace);
 			if (actionMessage.equals(ECHEC)){
 				actionMessage=ECHEC;
 			}
@@ -172,49 +151,51 @@ public class ProposerTrajet extends HttpServlet {
 				actionMessage=SUCCES;
 			}
 		}
-
+		//fin des lignes de code permettants l'affichage de message d'erreur
+		
 		form.put(FIELD_FUMEUR, fumeur);
 		form.put(FIELD_MUSIQUE, musique);
-
 		request.setAttribute("form", form);
 		request.setAttribute("erreurs", erreurs);
 		request.setAttribute("actionMessage", actionMessage);
 
+		// si le formulaire de trajet est correctement rempli, on associe le login du conducteur au trajet et on redirige vers l'index
 		if (actionMessage.equals(SUCCES)){
 			trajets.put(connectedUser.getName(), newTrajet);
 			application.setAttribute( "trajets", trajets );
 			RequestDispatcher dispat = request.getRequestDispatcher("/index.jsp");
 			dispat.forward(request,response);
-		} else{
+		} 
+		// sinon on revient sur le formulaire avec les messages d'erreurs pour les champs en question
+		else
+		{
 			request.setAttribute("errorStatus", false); 
 			RequestDispatcher dispat = request.getRequestDispatcher(VIEW_PAGES_URL);
 			dispat.forward(request,response);
 		}
 	}
 
-
+	//méthode detectant l'absence d'adresse rentrée
 	private String validateAdresse(String adresse) {
 		if ( adresse != null && adresse.trim().length() != 0 ) {
 			return "L'adresse est obligatoire"; 
 		}
 		return null ;
 	}
-
-	private String validateAdresseFacultative(String adresse) {
-		// TODO Auto-generated method stub
-		return null ;
-	}
-
+	
+	//méthode permettant l'affichage de message lors d'absence de date rentrée
 	private String validateDate(String date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	//méthode permettant l'affichage de message lors d'absence d'heure rentrée
 	private String validateHeure(String heure) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	//méthode permettant l'affichage de message lors d'absence ou d'un nombre incorrect de place rentrée
 	private String validateNbPlace(String nbplace) {
 		if ( nbplace != null && nbplace.trim().length() != 0 ) {
 			int i = Integer.parseInt(nbplace);

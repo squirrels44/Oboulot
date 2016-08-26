@@ -92,7 +92,7 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 			if (pwd.equals(users.get(name).getPwd())){
 				return res;
 			} else { res = "Mot de passe erronné" ;}
-			}else{ res = "identifiant erronné";}
+			}else{ res = "";}
 		}else{res = "Veuillez saisir un Mot de passe";
 
 		}

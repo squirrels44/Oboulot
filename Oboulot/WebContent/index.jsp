@@ -95,6 +95,7 @@
 					<li><a href="javascript:;" data-toggle="collapse" data-target="#Rechercher"><i class="fa fa-fw fa-search"></i>Rechercher<i class="fa fa-fw fa-caret-down"></i></a>
 						<div id="Rechercher" class="collapse">
 							<c:import url="/WEB-INF/trajet/formulaireRechercherTrajet.jsp"></c:import>
+							<c:import url="/WEB-INF/trajet/afficherRecherche.jsp"></c:import>
 						</div>
 					</li>
 					

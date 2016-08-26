@@ -1,22 +1,22 @@
 <form method="POST" action="formPropositionTrajet">
 	<div class="form-group">
-		<label class="control-label col-sm-6" for="ptdepart">Adresse de départ<span class="requis">*</span></label> 
+		<label class="control-label col-sm-6" for="pointDepart">Adresse de départ<span class="requis">*</span></label> 
 		<div class="col-sm-6">
-			<input type="text" id="ptdepart" name="ptdepart" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptdepart']}"/>
+			<input type="text" id="pointDepart" name="pointDepart" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointDepart']}"/>
 		</div>
 		<div style="color: #FF0000">${erreurs['ptdepart']}</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-6" for="ptarrivee">Adresse d'arrivée<span class="requis">*</span></label>
+		<label class="control-label col-sm-6" for="pointArrivee">Adresse d'arrivée<span class="requis">*</span></label>
 		<div class="col-sm-6">
-			<input type="text" id="ptarrivee" name="ptarrivee" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptarrivee']}" />
+			<input type="text" id="pointArrivee" name="pointArrivee" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointArrivee']}" />
 		</div>
 		<div style="color: #FF0000">${erreurs['ptarrivee']}</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-6" for="ptpassage">Adresse d'un point de passage</label>
+		<label class="control-label col-sm-6" for="pointIntermediaire">Adresse d'un point de passage</label>
 		<div class="col-sm-6">
-			<input type="text" id="ptpassage" name="ptpassage" onBlur="calculateAndDisplayRoute('ptdepart','ptarrivee')" value="${form['ptpassage']}" />
+			<input type="text" id="pointIntermediaire" name="pointIntermediaire" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointIntermediaire']}" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -34,11 +34,11 @@
 		<div style="color: #FF0000">${erreurs['heure']}</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-6" for="nbplace">Nombre de places disponibles<span class="requis">*</span></label> 
+		<label class="control-label col-sm-6" for="nombrePlace">Nombre de places disponibles<span class="requis">*</span></label> 
 		<div class="col-sm-6">
-			<input type="number" min="1" max="4" id="nbplace"  name="nbplace" value="${form['nbplace']}" /><br />
+			<input type="number" min="1" max="4" id="nombrePlace"  name="nombrePlace" value="${form['nombrePlace']}" /><br />
 		</div>
-		<div style="color: #FF0000">${erreurs['nbplace']}</div>
+		<div style="color: #FF0000">${erreurs['nombrePlace']}</div>
 	</div>
 	<div class="checkbox">			
 		<label class="control-label col-sm-6" for="fumeur">Fumeur :</label>
@@ -52,10 +52,10 @@
 	<div class="checkbox">			
 		<label class="control-label col-sm-6" for="musique">Musique :</label>
 		<div class="col-sm-6">
-			<input type="radio" name="musique" value="NonMusique" checked>
-			<label for="NonMusique">Sans musique</label>
-			<input type="radio" name="musique" value="AvecMusique">
-			<label for="AvecMusique">Avec musique</label>
+			<input type="radio" name="musique" value="nonMusique" checked>
+			<label for="nonMusique">Sans musique</label>
+			<input type="radio" name="musique" value="avecMusique">
+			<label for="avecMusique">Avec musique</label>
 		</div>
 	</div>			
 	<div class="form-group">

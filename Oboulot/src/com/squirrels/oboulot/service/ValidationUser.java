@@ -7,8 +7,10 @@ import com.squirrels.oboulot.bean.User;
 public class ValidationUser {	//Centralisation des methodes de validation d'inscription et de connexion des users
 
 
+	UserService userService;
+
 	/////////////////////
-	   //INSCRIPTION//
+	//INSCRIPTION//
 	/////////////////////
 
 	//critère de validation de l'email d'inscription
@@ -50,7 +52,7 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 		}
 		return null ;
 	}
-	
+
 	//critere de validation du nom d'inscription
 	public String validateNameInscription( String name, Map<String, User> users ){ 
 		if ( name != null && name.trim().length() != 0 ) {
@@ -64,29 +66,39 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 	}
 
 	/////////////////////
-	    //CONNEXION//
+	//CONNEXION//
 	/////////////////////
 
 	//critere de validation du nom de connexion
-	public String validateNameConnexion(String name, String nameInscription){
+	public String validateNameConnexion(String name, Map<String, User> users){
 		String res = null;
 		if(name ==null || name.trim().length() == 0){
 			res = "Veuillez saisir un identifiant valide";
-		}else if( name==nameInscription ){
+		}else if (users.keySet().contains(name)){
 			return res; 
-		}return res;
+		}else{res = "Nom invalide";
+		
+		} 
+
+		return res;
 	}
+
 
 
 	//critere de validation du mot de passe de connexion
-	public String validatePwdConnexion(String pwd, String pwdInscription) {
+	public String validatePwdConnexion(String pwd, Map<String, User> users) {
 		String res = null;
 		if(pwd ==null || pwd.trim().length() == 0){
 			res = "Veuillez saisir un mot de passe valide";
-		}else if( pwd==pwdInscription ){
+		}else if (users.keySet().contains(pwd)){
 			return res; 
-		}return res;
+		}else{res = "Mot de passe erronné";
+		
+		} 
 
+		return res;
 	}
+
+
 
 }

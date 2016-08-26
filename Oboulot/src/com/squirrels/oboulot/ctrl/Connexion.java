@@ -30,18 +30,18 @@ public class Connexion extends HttpServlet {
 	public static String VIEW_PAGES_URL_SUCCES="/index.jsp";
 	public static final String FIELD_PWD = "pwd";
 	public static final String FIELD_NAME = "name";
-	
-	
+
+
 	ValidationInterface validator;
 	ValidationUser validationUser =new ValidationUser();
-	
+	UserService userService; 
 
-//	public ValidationInterface getValidator() {
-//		if(validator==null){
-//			validator=new ValidationNo();
-//		}
-//		return validator;
-//	}
+	//	public ValidationInterface getValidator() {
+	//		if(validator==null){
+	//			validator=new ValidationNo();
+	//		}
+	//		return validator;
+	//	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -71,10 +71,6 @@ public class Connexion extends HttpServlet {
 		//Accés aux parametres de connexion (rentrés par l'utilisateur : connexion)
 		String pwd = request.getParameter(FIELD_PWD);
 		String name = request.getParameter(FIELD_NAME);
-		
-		//Accès aux parametres de connexion (rentrés par l'utilisateur : inscription)
-		String nameInscription = request.getParameter(Inscription.FIELD_NAME);
-		String pwdInscription = request.getParameter(Inscription.FIELD_PWD1);
 
 
 		Map<String, String> form = new HashMap<String, String>(); 
@@ -82,8 +78,11 @@ public class Connexion extends HttpServlet {
 		//Traitement des erreurs
 		Map<String, String> erreurs = new HashMap<String, String>();
 		String actionMessage = "";
-		String errName = validationUser.validateNameConnexion(name, nameInscription);
-		String errPwd = validationUser.validatePwdConnexion(pwd, pwdInscription);
+
+		//On crée le singleton et la map si il/elle n'existe pas
+		Map<String, User> users = UserService.getInstance().getUserMap();
+		String errName = validationUser.validateNameConnexion(name, users);
+		String errPwd = validationUser.validatePwdConnexion(pwd, users);
 
 		//Si ya des erreurs
 		if(errPwd!=null){	
@@ -98,19 +97,17 @@ public class Connexion extends HttpServlet {
 		if((errPwd==null)&&(errName==null)){
 			form.put(FIELD_PWD, pwd);
 			form.put(FIELD_NAME, name);
-			
-			
+
 
 			// L'utilisateur existe ! Donc il est dans users (SessionScope)
 			User connectedUser= null;
-			
+
 			//On crée le singleton s'il n'existe pas
-			UserService userService = UserService.getInstance();
-			
+			//userService = UserService.getInstance();
+
 			//On va chercher l'attribut dans la classe UserService
-			Map<String, User> users = userService.getUserMap();
-			
-			//Map<String, User> users = (HashMap<String, User>) application.getAttribute("users");
+			//users = userService.getUserMap();
+
 
 			connectedUser= users.get(name);
 			session.setAttribute("connectedUser", connectedUser);
@@ -118,12 +115,11 @@ public class Connexion extends HttpServlet {
 			request.setAttribute("actionMessage", actionMessage); 
 
 
-			//
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_SUCCES).forward(request, response);
 
 
 		}
-		
+
 		//Si erreurs, on recharge la page de connexion et on affiche les erreurs correspondantes
 		else{
 			if (errPwd!=null){

@@ -26,7 +26,7 @@ import com.squirrels.oboulot.service.ValidationUser;
 @WebServlet("/formConnexion")
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL_ECHEC="/WEB-INF/compte/formulaireConnexion.jsp";
+	public static String VIEW_PAGES_URL_ECHEC="/index.jsp";
 	public static String VIEW_PAGES_URL_SUCCES="/index.jsp";
 	public static final String FIELD_PWD = "pwd";
 	public static final String FIELD_NAME = "name";

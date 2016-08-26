@@ -1,39 +1,39 @@
 package com.squirrels.oboulot.bean;
 
 public class Trajet {
+	/**
+	 * Ce bean contient les informations d'adresses relatives au trajet 
+	 */
 	
-	private String ptdepart;
-	private String ptarrivee;
-	private String ptintermediaire;
+	private String pointDepart;	//adresse entrée dans le formulaire en tant que point de départ
+	private String pointArrivee;	//adresse entrée dans le formulaire en tant que point d'arrivée
+	private String pointIntermediaire;	//adresse entrée dans le formulaire en tant que point de passage
 
-	public Trajet(String ptdepart, String ptarrivee, String ptintermediaire) {
-		this.ptdepart = ptdepart;
-		this.ptarrivee = ptarrivee;
-		this.ptintermediaire = ptintermediaire;
+	public Trajet(String pointDepart, String pointArrivee, String pointIntermediaire) {
+		this.pointDepart = pointDepart;
+		this.pointArrivee = pointArrivee;
+		this.pointIntermediaire = pointIntermediaire;
 	}
 
 	public String getPtdepart() {
-		return ptdepart;
+		return pointDepart;
 	}
-
-	public void setPtdepart(String ptdepart) {
-		this.ptdepart = ptdepart;
+	public void setPtdepart(String pointDepart) {
+		this.pointDepart = pointDepart;
 	}
 
 	public String getPtarrivee() {
-		return ptarrivee;
+		return pointArrivee;
 	}
-
-	public void setPtarrivee(String ptarrivee) {
-		this.ptarrivee = ptarrivee;
+	public void setPtarrivee(String pointArrivee) {
+		this.pointArrivee = pointArrivee;
 	}
 	
 	public String getPtintermediaire() {
-		return ptintermediaire;
+		return pointIntermediaire;
 	}
-
-	public void setPtintermediaire(String ptintermediaire) {
-		this.ptintermediaire = ptintermediaire;
+	public void setPtintermediaire(String pointIntermediaire) {
+		this.pointIntermediaire = pointIntermediaire;
 	}
 
 }

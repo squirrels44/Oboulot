@@ -76,8 +76,12 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 		if(name !=null && name.trim().length() != 0){
 			if (users.keySet().contains(name)){
 				return res;
-			} else { res = "Identifiant erronné" ;}
-		}else{res = "Veuillez saisir un identifiant";
+			}
+			else {
+				res = "Identifiant erronné" ;
+			}
+		}else{
+			res = "Veuillez saisir un identifiant";
 
 		}
 		return res ;
@@ -89,12 +93,20 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 		Map<String, User> users = UserService.getInstance().getUserMap();
 		if(pwd !=null && pwd.trim().length() != 0){
 			if(users.keySet().contains(name)){
-			if (pwd.equals(users.get(name).getPwd())){
-				return res;
-			} else { res = "Mot de passe erronné" ;}
-			}else{ res = "";}
-		}else{res = "Veuillez saisir un Mot de passe";
-
+				User myUser=users.get(name);
+				if (pwd.equals(myUser.getPwd())){
+					return res;
+				}
+				else {
+					res = "Mot de passe erronné" ;
+				}
+			}
+			else{
+				res = "";
+			}
+		}
+		else{
+			res = "Veuillez saisir un Mot de passe";
 		}
 		return res ;
 	}

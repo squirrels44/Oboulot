@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<label class="control-label col-sm-6" for="pointArrivee">Adresse d'arrivée<span class="requis">*</span></label>
 		<div class="col-sm-6">
-			<input class="form-control" type="text" id="pointArrivee" name="pointArrivee" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointArrivee']}" />
+			<input class="form-control" type="text" id="pointArrivee" name="pointArrivee" onBlur="calculateAndDisplayRoute('pointDepart','pointArrivee')" value="${form['pointArrivee']}"/>
 		</div>
 		<div style="color: #FF0000">${erreurs['pointArrivee']}</div>
 	</div>

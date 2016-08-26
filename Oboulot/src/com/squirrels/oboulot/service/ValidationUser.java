@@ -88,13 +88,15 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 		String res = null;
 		Map<String, User> users = UserService.getInstance().getUserMap();
 		if(pwd !=null && pwd.trim().length() != 0){
+			if(users.keySet().contains(name)){
 			if (pwd.equals(users.get(name).getPwd())){
 				return res;
 			} else { res = "Mot de passe erronné" ;}
+			}else{ res = "identifiant erronné";}
 		}else{res = "Veuillez saisir un Mot de passe";
 
 		}
 		return res ;
 	}
-
 }
+

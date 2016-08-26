@@ -1,23 +1,27 @@
+/*
+ * bean permettant l'accès aux éléments d'un utilisateur
+ * réalisé par benji
+ */
 package com.squirrels.oboulot.bean;
 
 public class User {
 	
-	private String name;
+	private String name; // le name est unique, c'est un login
 	private String email;
 	private String pwd;
 	private String tel;
 
-	public User() {
+	//constructeur de l'objet user
+	public User(String name, String email, String pwd, String tel) 
+	{
 		super();
-	}
-
-	public User(String name, String email, String pwd, String tel) {
 		this.name = name;
 		this.email = email;
 		this.pwd = pwd;
 		this.tel = tel;
 	}
 
+	//série de getters et setters permettant la lecture et modification des données d'un utilisateur
 	public String getName() {
 		return name;
 	}

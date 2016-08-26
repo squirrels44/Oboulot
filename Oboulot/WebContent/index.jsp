@@ -113,7 +113,7 @@
 			</div>
 		</nav>
 		<div id="page-wrapper">
-			 <c:import url="carte/carte.jsp"></c:import> 
+			 <c:import url="/WEB-INF/carte/carte.jsp"></c:import> 
 		</div>
 	</div>
 

@@ -5,10 +5,13 @@ import java.util.Map;
 import com.squirrels.oboulot.bean.User;
 
 public class ValidationUser {		//Centralisation des methodes de validation d'inscription et de connexion des users
-	
-	
-	//méthode de validation d'inscription
-	
+
+
+	/////////////////////
+	   //INSCRIPTION//
+	/////////////////////
+
+	//méthode de validation de l'email d'inscription
 	public String validateEmailInscription( String email ){ 
 		if ( email != null && email.trim().length() != 0 ) {
 			if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) { 
@@ -19,7 +22,8 @@ public class ValidationUser {		//Centralisation des methodes de validation d'ins
 		}
 		return null ;
 	}
-	
+
+	//méthode de validation du password d'inscription
 	public String validatePwdInscription(String pwd1, String pwd2){
 		if (pwd1 != null && pwd1.trim().length() > 5){
 			if (pwd2 != null && pwd2.trim().length() != 0){
@@ -34,7 +38,8 @@ public class ValidationUser {		//Centralisation des methodes de validation d'ins
 		}
 		return null;
 	}
-	
+
+	//méthode de validation du téléphone d'inscription
 	public String validateTelInscription( String tel ){ 
 		if ( tel != null && tel.trim().length() == 10 ) {
 			if ( !tel.startsWith("0")) { 
@@ -45,7 +50,8 @@ public class ValidationUser {		//Centralisation des methodes de validation d'ins
 		}
 		return null ;
 	}
-	
+
+	//méthode de validation du nom d'inscription
 	public String validateNameInscription( String name, Map<String, User> users ){ 
 		if ( name != null && name.trim().length() != 0 ) {
 			if (users.keySet().contains(name)){
@@ -57,9 +63,11 @@ public class ValidationUser {		//Centralisation des methodes de validation d'ins
 		return null ;
 	}
 
-	
-		//Methode validation de connexion
-	
+	/////////////////////
+	    //CONNEXION//
+	/////////////////////
+
+	//méthode de validation du nom de connexion
 	public String validateNameConnexion(String name, String nameInscription){
 		String res = null;
 		if(name ==null || name.trim().length() == 0){
@@ -69,8 +77,8 @@ public class ValidationUser {		//Centralisation des methodes de validation d'ins
 		}return res;
 	}
 
-	//TODO : récupérer la méthode de validation de charlotte pour faire coorespondre le nom inscrit et logué.
 
+	//méthode de validation du password de connexion
 	public String validatePwdConnexion(String pwd, String pwdInscription) {
 		String res = null;
 		if(pwd ==null || pwd.trim().length() == 0){

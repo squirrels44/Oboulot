@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
+//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.squirrels.oboulot.bean.User;
 import com.squirrels.oboulot.service.UserService;
 import com.squirrels.oboulot.service.ValidationInterface;
-import com.squirrels.oboulot.service.ValidationNo;
+//import com.squirrels.oboulot.service.ValidationNo;
 import com.squirrels.oboulot.service.ValidationUser;
 
 
@@ -26,8 +26,8 @@ import com.squirrels.oboulot.service.ValidationUser;
 @WebServlet("/formConnexion")
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/compte/formulaireConnexion.jsp";
-	public static String VIEW_PAGES_URL2="/index.jsp";
+	public static String VIEW_PAGES_URL_ECHEC="/WEB-INF/compte/formulaireConnexion.jsp";
+	public static String VIEW_PAGES_URL_SUCCES="/index.jsp";
 	public static final String FIELD_PWD = "pwd";
 	public static final String FIELD_NAME = "name";
 	
@@ -36,12 +36,12 @@ public class Connexion extends HttpServlet {
 	ValidationUser validationUser =new ValidationUser();
 	
 
-	public ValidationInterface getValidator() {
-		if(validator==null){
-			validator=new ValidationNo();
-		}
-		return validator;
-	}
+//	public ValidationInterface getValidator() {
+//		if(validator==null){
+//			validator=new ValidationNo();
+//		}
+//		return validator;
+//	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -54,7 +54,7 @@ public class Connexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward( request, response );
+		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_ECHEC).forward( request, response );
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +85,7 @@ public class Connexion extends HttpServlet {
 		String errName = validationUser.validateNameConnexion(name, nameInscription);
 		String errPwd = validationUser.validatePwdConnexion(pwd, pwdInscription);
 
-		//Si le message d'erreur n'est pas null
+		//Si ya des erreurs
 		if(errPwd!=null){	
 			erreurs.put(FIELD_PWD, errPwd);
 		} 
@@ -94,10 +94,12 @@ public class Connexion extends HttpServlet {
 			erreurs.put(FIELD_NAME, errName);
 		}
 
-		//Si le message d'erreur est null
+		//Si ya pas d'erreurs
 		if((errPwd==null)&&(errName==null)){
 			form.put(FIELD_PWD, pwd);
 			form.put(FIELD_NAME, name);
+			
+			
 
 			// L'utilisateur existe ! Donc il est dans users (SessionScope)
 			User connectedUser= null;
@@ -116,11 +118,13 @@ public class Connexion extends HttpServlet {
 			request.setAttribute("actionMessage", actionMessage); 
 
 
-
-			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL2).forward(request, response);
+			//
+			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_SUCCES).forward(request, response);
 
 
 		}
+		
+		//Si erreurs, on recharge la page de connexion et on affiche les erreurs correspondantes
 		else{
 			if (errPwd!=null){
 				actionMessage = erreurs.get(FIELD_PWD);
@@ -134,7 +138,7 @@ public class Connexion extends HttpServlet {
 			//précise si l'enregistrement a échoué
 			request.setAttribute("errorStatus", false);
 
-			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
+			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_ECHEC).forward(request, response);
 		}
 	}
 }

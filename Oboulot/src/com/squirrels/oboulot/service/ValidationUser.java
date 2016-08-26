@@ -51,6 +51,7 @@ public class ValidationUser {	//Centralisation des methodes de validation d'insc
 		return null ;
 	}
 
+	
 	//critere de validation du nom d'inscription
 	public String validateNameInscription( String name, Map<String, User> users ){ 
 		if ( name != null && name.trim().length() != 0 ) {

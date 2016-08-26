@@ -24,7 +24,7 @@ import com.squirrels.oboulot.service.ValidationTrajet;
 @WebServlet("/formRechercheTrajet")
 public class RechercherTrajet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/trajet/formulaireRechercherTrajet.jsp";
+	public static String VIEW_PAGES_URL="/index.jsp";
 	public static final String FIELD_DPT = "ptdepart";
 	public static final String FIELD_ARV = "ptarrivee"; 
 	public static final String FIELD_DATE = "date"; 
